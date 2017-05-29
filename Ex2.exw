@@ -1,0 +1,53 @@
+include std/machine.e
+include std/get.e
+
+include EuIrr.ew
+
+constant TRUE = 1, FALSE = 0
+
+atom scene,video
+atom fs
+atom mesh,mnode,node
+atom cur
+
+atom dim = irrDimension2duNew(600,600)
+atom backColor = irrSColorNew(255,100,100,100)
+atom pos = irrVector3dfNew(-1300,-144,-1249)
+
+irrCreateDevice(dim,FALSE,FALSE,TRUE)
+
+scene = irrIrrlichtDeviceGetSceneManager()
+video = irrIrrlichtDeviceGetVideoDriver()
+fs = irrIrrlichtDeviceGetFileSystem()
+
+irrIFileSystemAddFileArchive(fs,"map-20kdm2.pk3",TRUE,TRUE)
+
+mesh = irrISceneManagerGetMesh(scene,"20kdm2.bsp")
+mnode = irrISceneManagerAddOcreeSceneNodeA(scene,mesh,irrISceneNodeNull(),irrGetDefaultID(),512)
+node = irrIMeshSceneNodeGetSceneNode(mnode)
+
+irrISceneNodeSetPosition(node,pos)
+
+irrISceneManagerAddCameraSceneNodeFPS(scene)
+
+cur = irrIrrlichtDeviceGetCursorControl()
+irrICursorControlSetVisible(cur,FALSE)
+
+atom fps = irrIVideoDriverGetFPS(video)
+
+while irrIrrlichtDeviceRun() do
+	
+   irrIrrlichtDeviceSetWindowsCaption("Example 2 - Press Alt+F4 to close - Use Mouse & Arrow keys to move")
+   
+	irrIVideoDriverBeginScene(video,TRUE,TRUE,backColor)
+	irrISceneManagerDrawAll(scene)
+	
+	irrIVideoDriverEndScene(video)
+   
+end while
+
+irrDimension2duDelete(dim)
+irrVector3dfDelete(pos)
+irrSColorDelete(backColor)
+irrIrrlichtDeviceDrop()
+­52.23

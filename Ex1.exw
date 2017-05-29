@@ -1,0 +1,83 @@
+include std/machine.e
+
+include EuIrr.ew
+include std/get.e
+
+--Get vars ready
+constant TRUE = 1, FALSE = 0
+
+atom dims = irrDimension2duNew(640,480)
+atom campos = irrVector3dfNew(0,30,-40)
+atom camat = irrVector3dfNew(0,5,0)
+atom rect = irrRectiNew(10,10,262,22)
+
+atom driver,scene,gui
+atom col = irrSColorNew(255,100,100,100)
+
+--create Irrlicht device
+irrCreateDevice(dims,FALSE,TRUE,FALSE)
+
+--check if was created properly
+if irrIrrlichtDeviceWasCreated() = -1 then
+	puts(1,"Failed to create device!\n")
+	abort(0)
+end if
+
+--get Irrlicht drivers ready
+driver = irrIrrlichtDeviceGetVideoDriver()
+scene = irrIrrlichtDeviceGetSceneManager()
+gui = irrIrrlichtDeviceGetGUIEnviroment()
+
+--title in window
+irrIrrlichtDeviceSetWindowsCaption("Example 1")
+
+--add gui text
+irrIGUIEnviromentAddStaticText(gui,"Hello World",rect,TRUE,FALSE,irrIGUIElementGetNull(),irrGetDefaultID(),TRUE)
+
+--load mesh and set node
+atom mesh = irrISceneManagerGetMesh(scene,"sydney.md2")
+
+atom node = irrISceneManagerAddAnimatedMeshSceneNode(scene,mesh)
+
+--Setup node
+if node then
+	atom tex
+	atom sn = irrIAnimatedMeshSceneNodeGetSceneNode(node)
+	irrISceneNodeSetMaterialFlag(sn,irr_video_EMF_LIGHTING(),FALSE)
+	
+	irrIAnimatedMeshSceneNodeSetFrameLoop(node,0,157)
+	
+ 	tex = irrIVideoDriverGetTexture(driver,"sydney.bmp")
+ 	irrISceneNodeSetMaterialTexture(sn,0,tex)	
+end if
+
+
+--Display using Camera
+irrISceneManagerAddCameraSceneNode(scene,irrISceneNodeNull(),campos,camat,TRUE)
+
+--Run Irrlicht
+while irrIrrlichtDeviceRun() do
+
+	atom key = get_key()
+	
+	irrIVideoDriverBeginScene(driver,TRUE,TRUE,col)
+	
+	irrISceneManagerDrawAll(scene)
+	
+	irrIGUIEnviromentDrawAll(gui)
+	
+	irrIVideoDriverEndScene(driver)
+	
+	if key = 27 then
+		irrIrrlichtDeviceClose()
+	end if
+
+end while
+
+--Cleanup
+irrDimension2duDelete(dims)
+irrSColorDelete(col)
+irrVector3dfDelete(campos)
+irrVector3dfDelete(camat)
+irrRectiDelete(rect)
+irrIrrlichtDeviceDrop()

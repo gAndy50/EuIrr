@@ -1,0 +1,3166 @@
+-------------------------------------------------
+--Title: EuIrr                                 --
+--Author: Andy P - (Icy_Viking)                --
+--Eu ver: 4.0.5                                --
+--Irr Ver: 1.8.4                               --
+--Based off CIrrlicht                          --
+-------------------------------------------------
+include std/machine.e
+include std/dll.e
+
+atom irr = open_dll("cirrlicht.dll")
+
+if irr = -1 then
+	puts(1,"Failed to open cirrlicht.dll!\n")
+	abort(0)
+end if
+
+--Dimension2d
+
+public constant xirrDimension2duNew = define_c_func(irr,"irrDimension2duNew",{C_UINT,C_UINT},C_POINTER)
+
+public function irrDimension2duNew(atom w,atom h)
+
+ return c_func(xirrDimension2duNew,{w,h})
+	
+end function
+
+public constant xirrDimension2duDelete = define_c_proc(irr,"irrDimension2duDelete",{C_POINTER})
+
+public procedure irrDimension2duDelete(atom dim)
+
+ c_proc(xirrDimension2duDelete,{dim})
+	
+end procedure
+
+public constant xirrDimension2duEqual = define_c_func(irr,"irrDimensiond2uEqual",{C_UINT,C_UINT,C_UINT,C_UINT},C_BOOL)
+
+public function irrDimension2duEqual(atom w1,atom h1,atom w2,atom h2)
+
+ return c_func(xirrDimension2duEqual,{w1,h1,w2,h2})
+	
+end function
+
+public constant xirrDimensiond2duSet2 = define_c_proc(irr,"irrDimensiond2duSet2",{C_POINTER,C_UINT,C_UINT})
+
+public procedure irrDimensiond2duSet2(atom dim,atom w,atom h)
+
+ c_proc(xirrDimensiond2duSet2,{dim,w,h})
+	
+end procedure
+
+--Note: It is misspelled (with should be width) in the C file
+public constant xirrDimensiond2duSetWith = define_c_proc(irr,"irrDimensiond2duSetWith",{C_POINTER,C_UINT})
+
+public procedure irrDimensiond2duSetWith(atom dim,atom w)
+
+ c_proc(xirrDimensiond2duSetWith,{dim,w})
+	
+end procedure
+
+public constant xirrDimensiond2duSetHeight = define_c_proc(irr,"irrDimensiond2duSetHeight",{C_POINTER,C_UINT})
+
+public procedure irrDimensiond2duSetHeight(atom dim,atom h)
+
+ c_proc(xirrDimensiond2duSetHeight,{dim,h})
+	
+end procedure
+
+--Note: It is misspelled (witdh should be width) in the C file
+public constant xirrDimensiond2duGetWitdh = define_c_func(irr,"irrDimensiond2duGetWitdh",{C_POINTER},C_UINT)
+
+public function irrDimensiond2duGetWitdh(atom dim)
+
+ return c_func(xirrDimensiond2duGetWitdh,{dim})
+	
+end function
+
+public constant xirrDimensiond2duGetHeight = define_c_func(irr,"irrDimensiond2duGetHeight",{C_POINTER},C_UINT)
+
+public function irrDimensiond2duGetHeight(atom dim)
+
+ return c_func(xirrDimensiond2duGetHeight,{dim})
+	
+end function 
+
+--Irrlicht Device
+
+public constant xirrGetDefaultID = define_c_func(irr,"irrGetDefaultID",{},C_POINTER)
+
+public function irrGetDefaultID()
+
+ return c_func(xirrGetDefaultID,{})
+	
+end function
+
+public constant xirrCreateDevice = define_c_func(irr,"irrCreateDevice",{C_POINTER,C_BOOL,C_BOOL,C_BOOL},C_BOOL)
+
+--Note: irrDimensiond2du is special variable type that holds two unsiged ints
+--to make the wrapper more Euphoria friendly, the irrDimensiond2du is declared as two
+--separate unsigned int vars, basiclly the width and height
+--or should I say witdh :P
+public function irrCreateDevice(atom dim,integer fullscreen,integer vsync,integer antialias)
+
+ return c_func(xirrCreateDevice,{dim,fullscreen,vsync,antialias})
+	
+end function
+
+public constant xirrIrrlichtDeviceClose = define_c_proc(irr,"irrIrrlichtDeviceClose",{})
+
+public procedure irrIrrlichtDeviceClose()
+
+ c_proc(xirrIrrlichtDeviceClose,{})
+	
+end procedure
+
+public constant xirrIrrlichtDeviceDrop = define_c_proc(irr,"irrIrrlichtDeviceDrop",{})
+
+public procedure irrIrrlichtDeviceDrop()
+
+ c_proc(xirrIrrlichtDeviceDrop,{})
+	
+end procedure
+
+public constant xirrIrrlichtDeviceRun = define_c_func(irr,"irrIrrlichtDeviceRun",{},C_BOOL)
+
+public function irrIrrlichtDeviceRun()
+
+ return c_func(xirrIrrlichtDeviceRun,{})
+	
+end function
+
+public constant xirrIrrlichtDeviceSetWindowsCaption = define_c_proc(irr,"irrIrrlichtDeviceSetWindowsCaption",{C_POINTER})
+
+public procedure irrIrrlichtDeviceSetWindowsCaption(sequence strw)
+
+ atom str = allocate_wstring(strw,1)
+ c_proc(xirrIrrlichtDeviceSetWindowsCaption,{str})
+	
+end procedure
+
+public constant xirrIrrlichtDeviceGetSceneManager = define_c_func(irr,"irrIrrlichtDeviceGetSceneManager",{},C_POINTER)
+
+public function irrIrrlichtDeviceGetSceneManager()
+
+ return c_func(xirrIrrlichtDeviceGetSceneManager,{})
+	
+end function
+
+--Another typo from the C wrapper should be Environment not Enviroment
+public constant xirrIrrlichtDeviceGetGUIEnviroment = define_c_func(irr,"irrIrrlichtDeviceGetGUIEnviroment",{},C_POINTER)
+
+public function irrIrrlichtDeviceGetGUIEnviroment()
+
+ return c_func(xirrIrrlichtDeviceGetGUIEnviroment,{})
+	
+end function
+
+public constant xirrIrrlichtDeviceGetVideoDriver = define_c_func(irr,"irrIrrlichtDeviceGetVideoDriver",{},C_POINTER)
+
+public function irrIrrlichtDeviceGetVideoDriver()
+
+ return c_func(xirrIrrlichtDeviceGetVideoDriver,{})
+	
+end function
+
+public constant xirrIrrlichtDeviceGetFileSystem = define_c_func(irr,"irrIrrlichtDeviceGetFileSystem",{},C_POINTER)
+
+public function irrIrrlichtDeviceGetFileSystem()
+
+ return c_func(xirrIrrlichtDeviceGetFileSystem,{})
+	
+end function
+
+public constant xirrIrrlichtDeviceGetCursorControl = define_c_func(irr,"irrIrrlichtDeviceGetCursorControl",{},C_POINTER)
+
+public function irrIrrlichtDeviceGetCursorControl()
+
+ return c_func(xirrIrrlichtDeviceGetCursorControl,{})
+	
+end function
+
+public constant xirrIrrlichtDeviceGetTimer = define_c_func(irr,"irrIrrlichtDeviceGetTimer",{},C_POINTER)
+
+public function irrIrrlichtDeviceGetTimer()
+
+ return c_func(xirrIrrlichtDeviceGetTimer,{})
+	
+end function
+
+public constant xirrIrrlichtDeviceWasCreated = define_c_func(irr,"irrIrrlichtDeviceWasCreated",{},C_BOOL)
+
+public function irrIrrlichtDeviceWasCreated()
+
+ return c_func(xirrIrrlichtDeviceWasCreated,{})
+	
+end function
+
+public constant xirrIrrlichtDevicePopEvent = define_c_func(irr,"irrIrrlichtDevicePopEvent",{C_POINTER},C_BOOL)
+
+public function irrIrrlichtDevicePopEvent(atom evt)
+
+ return c_func(xirrIrrlichtDevicePopEvent,{evt})
+	
+end function
+
+--SColor
+
+public constant xirrSColorNew = define_c_func(irr,"irrSColorNew",{C_UINT,C_UINT,C_UINT,C_UINT},C_POINTER)
+
+public function irrSColorNew(atom a,atom r,atom g,atom b)
+
+ return c_func(xirrSColorNew,{a,r,g,b})
+	
+end function
+
+public constant xirrSColorDelete = define_c_proc(irr,"irrSColorDelete",{C_POINTER})
+
+public procedure irrSColorDelete(atom col)
+
+ c_proc(xirrSColorDelete,{col})
+	
+end procedure
+
+public constant xirrSColorGetAlpha = define_c_func(irr,"irrSColorGetAlpha",{C_POINTER},C_UINT)
+
+public function irrSColorGetAlpha(atom col)
+
+ return c_func(xirrSColorGetAlpha,{col})
+	
+end function
+
+public constant xirrSColorGetRed = define_c_func(irr,"irrSColorGetRed",{C_POINTER},C_UINT)
+
+public function irrSColorGetRed(atom col)
+
+ return c_func(xirrSColorGetRed,{col})
+	
+end function
+
+public constant xirrSColorGetGreen = define_c_func(irr,"irrSColorGetGreen",{C_POINTER},C_UINT)
+
+public function irrSColorGetGreen(atom col)
+
+ return c_func(xirrSColorGetGreen,{col})
+	
+end function
+
+public constant xirrSColorGetBlue = define_c_func(irr,"irrSColorGetBlue",{C_POINTER},C_UINT)
+
+public function irrSColorGetBlue(atom col)
+
+ return c_func(xirrSColorGetBlue,{col})
+	
+end function
+
+public constant xirrSColorSetAlpha = define_c_proc(irr,"irrSColorSetAlpha",{C_POINTER,C_UINT})
+
+public procedure irrSColorSetAlpha(atom col,atom a)
+
+ c_proc(xirrSColorSetAlpha,{col,a})
+	
+end procedure
+
+public constant xirrSColorSetRed = define_c_proc(irr,"irrSColorSetRed",{C_POINTER,C_UINT})
+
+public procedure irrSColorSetRed(atom col,atom r)
+
+ c_proc(xirrSColorSetRed,{col,r})
+	
+end procedure
+
+public constant xirrSColorSetGreen = define_c_proc(irr,"irrSColorSetGreen",{C_POINTER,C_UINT})
+
+public procedure irrSColorSetGreen(atom col,atom g)
+
+ c_proc(xirrSColorSetGreen,{col,g})
+	
+end procedure
+
+public constant xirrSColorSetBlue = define_c_proc(irr,"irrSColorSetBlue",{C_POINTER,C_UINT})
+
+public procedure irrSColorSetBlue(atom col,atom b)
+
+ c_proc(xirrSColorSetBlue,{col,b})
+	
+end procedure
+
+public constant xirrSColorSet = define_c_proc(irr,"irrSColorSet",{C_POINTER,C_UINT,C_UINT,C_UINT,C_UINT})
+
+public procedure irrSColorSet(atom col,atom a,atom r,atom g,atom b)
+
+ c_proc(xirrSColorSet,{col,a,r,g,b})
+	
+end procedure
+
+--Rect
+
+public constant xirrRectiNew = define_c_func(irr,"irrRectiNew",{C_INT,C_INT,C_INT,C_INT},C_POINTER)
+
+public function irrRectiNew(atom x,atom y,atom x2,atom y2)
+
+ return c_func(xirrRectiNew,{x,y,x2,y2})
+	
+end function
+
+public constant xirrRectiDelete = define_c_proc(irr,"irrRectiDelete",{C_POINTER})
+
+public procedure irrRectiDelete(atom rect)
+
+ c_proc(xirrRectiDelete,{rect})
+	
+end procedure
+
+public constant xirrRectiSetUpperLeftCorner = define_c_proc(irr,"irrRectiSetUpperLeftCorner",{C_POINTER,C_INT,C_INT})
+
+public procedure irrRectiSetUpperLeftCorner(atom rect,atom x,atom y)
+
+ c_proc(xirrRectiSetUpperLeftCorner,{rect,x,y})
+	
+end procedure
+
+public constant xirrRectiSetLowerRightCorner = define_c_proc(irr,"irrRectiSetLowerRightCorner",{C_POINTER,C_INT,C_INT})
+
+public procedure irrRectiSetLowerRightCorner(atom rect,atom x,atom y)
+
+ c_proc(xirrRectiSetLowerRightCorner,{rect,x,y})
+	
+end procedure
+
+public constant xirrRectiSet = define_c_proc(irr,"irrRectiSet",{C_POINTER,C_INT,C_INT,C_INT,C_INT})
+
+public procedure irrRectiSet(atom rect,atom x,atom y,atom x2,atom y2)
+
+ c_proc(xirrRectiSet,{rect,x,y,x2,y2})
+	
+end procedure
+
+--Vector2df
+
+public constant xirrVector2dfNew = define_c_func(irr,"irrVector2dfNew",{C_FLOAT,C_FLOAT},C_POINTER)
+
+public function irrVector2dfNew(atom x,atom y)
+
+ return c_func(xirrVector2dfNew,{x,y})
+	
+end function
+
+public constant xirrVector2dfDelete = define_c_proc(irr,"irrVector2dfDelete",{C_POINTER})
+
+public procedure irrVector2dfDelete(atom vec)
+
+ c_proc(xirrVector2dfDelete,{vec})
+	
+end procedure
+
+public constant xirrVector2dfGetX = define_c_func(irr,"irrVector2dfGetX",{C_POINTER},C_FLOAT)
+
+public function irrVector2dfGetX(atom vec)
+
+ return c_func(xirrVector2dfGetX,{vec})
+	
+end function
+
+public constant xirrVector2dfGetY = define_c_func(irr,"irrVector2dfGetY",{C_POINTER},C_FLOAT)
+
+public function irrVector2dfGetY(atom vec)
+
+ return c_func(xirrVector2dfGetY,{vec})
+	
+end function
+
+public constant xirrVector2dfSetX = define_c_proc(irr,"irrVector2dfSetX",{C_POINTER,C_FLOAT})
+
+public procedure irrVector2dfSetX(atom vec,atom x)
+
+ c_proc(xirrVector2dfSetX,{vec,x})
+	
+end procedure
+
+public constant xirrVector2dfSetY = define_c_proc(irr,"irrVector2dfSetY",{C_POINTER,C_FLOAT})
+
+public procedure irrVector2dfSetY(atom vec,atom y)
+
+ c_proc(xirrVector2dfSetY,{vec,y})
+	
+end procedure
+
+public constant xirrVector2dfSet = define_c_proc(irr,"irrVector2dfSet",{C_POINTER,C_FLOAT,C_FLOAT})
+
+public procedure irrVector2dfSet(atom vec,atom x,atom y)
+
+ c_proc(xirrVector2dfSet,{vec,x,y})
+	
+end procedure
+
+public constant xirrVector2diNew = define_c_func(irr,"irrVector2diNew",{C_INT,C_INT},C_POINTER)
+
+public function irrVector2diNew(integer x,integer y)
+
+ return c_func(xirrVector2diNew,{x,y})
+	
+end function
+
+public constant xirrVector2diDelete = define_c_proc(irr,"irrVector2diDelete",{C_POINTER})
+
+public procedure irrVector2diDelete(atom vec)
+
+ c_proc(xirrVector2diDelete,{vec})
+	
+end procedure
+
+public constant xirrVector2diGetX = define_c_func(irr,"irrVector2diGetX",{C_POINTER},C_INT)
+
+public function irrVector2diGetX(atom vec)
+
+ return c_func(xirrVector2diGetX,{vec})
+	
+end function
+
+public constant xirrVector2diGetY = define_c_func(irr,"irrVector2diGetY",{C_POINTER},C_INT)
+
+public function irrVector2diGetY(atom vec)
+
+ return c_func(xirrVector2diGetY,{vec})
+	
+end function
+
+public constant xirrVector2diSetX = define_c_proc(irr,"irrVector2diSetX",{C_POINTER,C_INT})
+
+public procedure irrVector2diSetX(atom vec,atom x)
+
+ c_proc(xirrVector2diSetX,{vec,x})
+	
+end procedure
+
+public constant xirrVector2diSetY = define_c_proc(irr,"irrVector2diSetY",{C_POINTER,C_INT})
+
+public procedure irrVector2diSetY(atom vec,atom y)
+
+ c_proc(xirrVector2diSetY,{vec,y})
+	
+end procedure
+
+public constant xirrVector2diSet = define_c_proc(irr,"irrVector2diSet",{C_POINTER,C_INT,C_INT})
+
+public procedure irrVector2diSet(atom vec,atom x,atom y)
+
+ c_proc(xirrVector2diSet,{vec,x,y})
+	
+end procedure
+
+--Vector3df
+
+public constant xirrVector3dfNew = define_c_func(irr,"irrVector3dfNew",{C_FLOAT,C_FLOAT,C_FLOAT},C_POINTER)
+
+public function irrVector3dfNew(atom x,atom y,atom z)
+
+ return c_func(xirrVector3dfNew,{x,y,z})
+	
+end function
+
+public constant xirrVector3dfDelete = define_c_proc(irr,"irrVector3dfDelete",{C_POINTER})
+
+public procedure irrVector3dfDelete(atom vec)
+
+ c_proc(xirrVector3dfDelete,{vec})
+	
+end procedure
+
+public constant xirrVector3dfSet = define_c_proc(irr,"irrVector3dfSet",{C_POINTER,C_FLOAT,C_FLOAT,C_FLOAT})
+
+public procedure irrVector3dfSet(atom v,atom x,atom y,atom z)
+
+ c_proc(xirrVector3dfSet,{v,x,y,z})
+	
+end procedure
+
+public constant xirrVector3dfSetX = define_c_proc(irr,"irrVector3dfSetX",{C_POINTER,C_FLOAT})
+
+public procedure irrVector3dfSetX(atom v,atom x)
+
+ c_proc(xirrVector3dfSetX,{v,x})
+	
+end procedure
+
+public constant xirrVector3dfSetY = define_c_proc(irr,"irrVector3dfSetY",{C_POINTER,C_FLOAT})
+
+public procedure irrVector3dfSetY(atom v,atom y)
+
+ c_proc(xirrVector3dfSetY,{v,y})
+	
+end procedure
+
+public constant xirrVector3dfSetZ = define_c_proc(irr,"irrVector3dfSetZ",{C_POINTER,C_FLOAT})
+
+public procedure irrVector3dfSetZ(atom v,atom z)
+
+ c_proc(xirrVector3dfSetZ,{v,z})
+	
+end procedure
+
+public constant xirrVector3dfGetX = define_c_func(irr,"irrVector3dfGetX",{C_POINTER},C_FLOAT)
+
+public function irrVector3dfGetX(atom v)
+	
+ return c_func(xirrVector3dfGetX,{v})
+	
+end function
+
+public constant xirrVector3dfGetY = define_c_func(irr,"irrVector3dfGetY",{C_POINTER},C_FLOAT)
+
+public function irrVector3dfGetY(atom v)
+
+ return c_func(xirrVector3dfGetY,{v})
+	
+end function
+
+public constant xirrVector3dfGetZ = define_c_func(irr,"irrVector3dfGetZ",{C_POINTER},C_FLOAT)
+
+public function irrVector3dfGetZ(atom v)
+
+ return c_func(xirrVector3dfGetZ,{v})
+	
+end function
+
+--ISceneNode
+
+public constant xirrISceneNodeNull = define_c_func(irr,"irrISceneNodeNull",{},C_POINTER)
+
+public function irrISceneNodeNull()
+
+ return c_func(xirrISceneNodeNull,{})
+	
+end function
+
+public constant xirrISceneNodeSetMaterialFlag = define_c_proc(irr,"irrISceneNodeSetMaterialFlag",{C_POINTER,C_POINTER,C_BOOL})
+
+public procedure irrISceneNodeSetMaterialFlag(atom node,atom flag,integer val)
+
+ c_proc(xirrISceneNodeSetMaterialFlag,{node,flag,val})
+	
+end procedure
+
+public constant xirrISceneNodeSetPosition = define_c_proc(irr,"irrISceneNodeSetPosition",{C_POINTER,C_POINTER})
+
+public procedure irrISceneNodeSetPosition(atom node,atom pos)
+
+ c_proc(xirrISceneNodeSetPosition,{node,pos})
+	
+end procedure
+
+public constant xirrISceneNodeGetPosition = define_c_proc(irr,"irrISceneNodeGetPosition",{C_POINTER,C_POINTER})
+
+public procedure irrISceneNodeGetPosition(atom node,atom pos)
+
+ c_proc(xirrISceneNodeGetPosition,{node,pos})
+	
+end procedure
+
+public constant xirrISceneNodeSetMaterialTexture = define_c_proc(irr,"irrISceneNodeSetMaterialTexture",{C_POINTER,C_INT,C_POINTER})
+
+public procedure irrISceneNodeSetMaterialTexture(atom node,atom texlay,atom tex)
+
+ c_proc(xirrISceneNodeSetMaterialTexture,{node,texlay,tex})
+	
+end procedure
+
+public constant xirrISceneNodeSetVisible = define_c_proc(irr,"irrISceneNodeSetVisible",{C_POINTER,C_BOOL})
+
+public function irrISceneNodeSetVisible(atom node,integer visible)
+
+ return c_func(xirrISceneNodeSetVisible,{node,visible})
+	
+end function
+
+public constant xirrISceneNodeIsVisible = define_c_func(irr,"irrISceneNodeIsVisible",{C_POINTER},C_BOOL)
+
+public function irrISceneNodeIsVisible(atom node)
+
+ return c_func(xirrISceneNodeIsVisible,{node})
+	
+end function
+
+public constant xirrISceneNodeAddAnimator = define_c_proc(irr,"irrISceneNodeAddAnimator",{C_POINTER,C_POINTER})
+
+public procedure irrISceneNodeAddAnimator(atom node,atom ani)
+
+ c_proc(xirrISceneNodeAddAnimator,{node,ani})
+	
+end procedure
+
+public constant xirrISceneNodeSetScale = define_c_proc(irr,"irrISceneNodeSetScale",{C_POINTER,C_FLOAT})
+
+public procedure irrISceneNodeSetScale(atom node,atom scale)
+
+ c_proc(xirrISceneNodeSetScale,{node,scale})
+	
+end procedure
+
+public constant xirrISceneNodeSetRotation = define_c_proc(irr,"irrISceneNodeSetRotation",{C_POINTER,C_FLOAT})
+
+public procedure irrISceneNodeSetRotation(atom node,atom rot)
+
+ c_proc(xirrISceneNodeSetRotation,{node,rot})
+	
+end procedure
+
+--IVideo Driver
+
+public constant xirrIVideoDriverGetTexture = define_c_func(irr,"irrIVideoDriverGetTexture",{C_POINTER,C_POINTER},C_POINTER)
+
+public function irrIVideoDriverGetTexture(atom drv,sequence strc)
+
+ atom str = allocate_string(strc,1)
+ atom ret = c_func(xirrIVideoDriverGetTexture,{drv,str})
+ 
+ return ret
+	
+end function
+
+public constant xirrIVideoDriverBeginScene = define_c_func(irr,"irrIVideoDriverBeginScene",{C_POINTER,C_BOOL,C_BOOL,C_POINTER},C_BOOL)
+
+public function irrIVideoDriverBeginScene(atom drv,atom backbuf,atom z,atom col)
+
+ return c_func(xirrIVideoDriverBeginScene,{drv,backbuf,z,col})
+	
+end function
+
+public constant xirrIVideoDriverEndScene = define_c_func(irr,"irrIVideoDriverEndScene",{C_POINTER},C_BOOL)
+
+public function irrIVideoDriverEndScene(atom drv)
+
+ return c_func(xirrIVideoDriverEndScene,{drv})
+	
+end function
+
+public constant xirrIVideoDriverGetFPS = define_c_func(irr,"irrIVideoDriverGetFPS",{C_POINTER},C_UINT)
+
+public function irrIVideoDriverGetFPS(atom drv)
+
+ return c_func(xirrIVideoDriverGetFPS,{drv})
+	
+end function
+
+public constant xirrIVideoDriverGetName = define_c_func(irr,"irrIVideoDriverGetName",{C_POINTER},C_POINTER)
+
+public function irrIVideoDriverGetName(atom drv)
+
+ return c_func(xirrIVideoDriverGetName,{drv})
+	
+end function
+
+public constant xirrIVideoDriverDraw2DRectangle = define_c_proc(irr,"irrIVideoDriverDraw2DRectangle",{C_POINTER,C_POINTER,C_POINTER,C_POINTER})
+
+public procedure irrIVideoDriverDraw2DRectangle(atom drv,atom col,atom pos,sequence rect)
+
+ c_proc(xirrIVideoDriverDraw2DRectangle,{drv,col,pos,rect})
+	
+end procedure
+
+--ISceneManager
+
+public constant xirrISceneManagerGetMesh = define_c_func(irr,"irrISceneManagerGetMesh",{C_POINTER,C_POINTER},C_POINTER)
+
+public function irrISceneManagerGetMesh(atom scene,sequence strc)
+
+ atom str = allocate_string(strc,1)
+ atom ret = c_func(xirrISceneManagerGetMesh,{scene,str})
+ 
+ return ret
+	
+end function
+
+public constant xirrISceneManagerAddAnimatedMeshSceneNode = define_c_func(irr,"irrISceneManagerAddAnimatedMeshSceneNode",{C_POINTER,C_POINTER},C_POINTER)
+
+public function irrISceneManagerAddAnimatedMeshSceneNode(atom scene,atom mesh)
+
+ return c_func(xirrISceneManagerAddAnimatedMeshSceneNode,{scene,mesh})
+	
+end function
+
+public constant xirrISceneManagerDrawAll = define_c_proc(irr,"irrISceneManagerDrawAll",{C_POINTER})
+
+public procedure irrISceneManagerDrawAll(atom scene)
+
+ c_proc(xirrISceneManagerDrawAll,{scene})
+	
+end procedure
+
+public constant xirrISceneManagerAddCameraSceneNode = define_c_func(irr,"irrISceneManagerAddCameraSceneNode",{C_POINTER,C_POINTER,C_POINTER,C_POINTER,C_BOOL},C_POINTER)
+
+public function irrISceneManagerAddCameraSceneNode(atom mgr,atom par,atom pos,atom at,integer act)
+
+ return c_func(xirrISceneManagerAddCameraSceneNode,{mgr,par,pos,at,act})
+	
+end function
+
+public constant xirrISceneManagerAddOcreeSceneNodeA = define_c_func(irr,"irrISceneManagerAddOcreeSceneNodeA",{C_POINTER,C_POINTER,C_POINTER,C_INT,C_INT},C_POINTER)
+
+--Another misspelling I assume, probably should be Octree
+public function irrISceneManagerAddOcreeSceneNodeA(atom mgr,atom mesh,atom par,atom id,atom polynode)
+
+ return c_func(xirrISceneManagerAddOcreeSceneNodeA,{mgr,mesh,par,id,polynode})
+	
+end function
+
+public constant xirrISceneManagerAddCameraSceneNodeFPS = define_c_proc(irr,"irrISceneManagerAddCameraSceneNodeFPS",{C_POINTER})
+
+public procedure irrISceneManagerAddCameraSceneNodeFPS(atom mgr)
+
+ c_proc(xirrISceneManagerAddCameraSceneNodeFPS,{mgr})
+	
+end procedure
+
+public constant xirrISceneManagerAddSphereSceneNode = define_c_func(irr,"irrISceneManagerAddSphereSceneNode",{C_POINTER,C_FLOAT,C_INT},C_POINTER)
+
+public function irrISceneManagerAddSphereSceneNode(atom mgr,atom rad,integer count)
+
+ return c_func(xirrISceneManagerAddSphereSceneNode,{mgr,rad,count})
+	
+end function
+
+public constant xirrISceneManagerAddCubeSceneNode = define_c_func(irr,"irrISceneManagerAddCubeSceneNode",{C_POINTER,C_FLOAT},C_POINTER)
+
+public function irrISceneManagerAddCubeSceneNode(atom mgr,atom size)
+
+ return c_func(xirrISceneManagerAddCubeSceneNode,{mgr,size})
+	
+end function
+
+public constant xirrISceneManagerCreateFlyCircleAnimator = define_c_func(irr,"irrISceneManagerCreateFlyCircleAnimator",{C_POINTER,C_POINTER,C_FLOAT},C_POINTER)
+
+public function irrISceneManagerCreateFlyCircleAnimator(atom mgr,atom ctr,atom rad)
+
+ return c_func(xirrISceneManagerCreateFlyCircleAnimator,{mgr,ctr,rad})
+	
+end function
+
+public constant xirrISceneManagerCreateFlyStraightAnimator = define_c_func(irr,"irrISceneManagerCreateFlyStraightAnimator",{C_POINTER,C_POINTER,C_POINTER,C_UINT,C_BOOL,C_BOOL},C_POINTER)
+
+public function irrISceneManagerCreateFlyStraightAnimator(atom mgr,atom start,atom xend,atom timeforway, integer xloop,integer ping)
+
+ return c_func(xirrISceneManagerCreateFlyStraightAnimator,{mgr,start,xend,timeforway,xloop,ping})
+	
+end function
+
+--Event function
+
+public constant xirrSEventNew = define_c_func(irr,"irrSEventNew",{},C_POINTER)
+
+public function irrSEventNew()
+
+ return c_func(xirrSEventNew,{})
+	
+end function
+
+public constant xirrSEventDelete = define_c_proc(irr,"irrSEventDelete",{C_POINTER})
+
+public procedure irrSEventDelete(atom evt)
+
+ c_proc(xirrSEventDelete,{evt})
+	
+end procedure
+
+public constant xirrSEventIsKeyboardInputEvent = define_c_func(irr,"irrSEventIsKeyboardInputEvent",{C_POINTER},C_BOOL)
+
+public function irrSEventIsKeyboardInputEvent(atom evt)
+
+ return c_func(xirrSEventIsKeyboardInputEvent,{evt})
+	
+end function
+
+public constant xirrSEventIsMouseInputEvent = define_c_func(irr,"irrSEventIsMouseInputEvent",{C_POINTER},C_BOOL)
+
+public function irrSEventIsMouseInputEvent(atom evt)
+
+ return c_func(xirrSEventIsMouseInputEvent,{evt})
+	
+end function
+
+public constant xirrSEventIsJoystickInputEvent = define_c_func(irr,"irrSEventIsJoystickInputEvent",{C_POINTER},C_BOOL)
+
+public function irrSEventIsJoystickInputEvent(atom evt)
+
+ return c_func(xirrSEventIsJoystickInputEvent,{evt})
+	
+end function
+
+public constant xirrSEventIsGUIInputEvent = define_c_func(irr,"irrSEventIsGUIInputEvent",{C_POINTER},C_BOOL)
+
+public function irrSEventIsGUIInputEvent(atom evt)
+
+ return c_func(xirrSEventIsGUIInputEvent,{evt})
+	
+end function
+
+public constant xirrSEventGetGuiEvent = define_c_func(irr,"irrSEventGetGuiEvent",{C_POINTER},C_POINTER)
+
+public function irrSEventGetGuiEvent(atom evt)
+
+ return c_func(xirrSEventGetGuiEvent,{evt})
+	
+end function
+
+public constant xirrSEventGetKeyInput = define_c_func(irr,"irrSEventGetKeyInput",{C_POINTER},C_POINTER)
+
+public function irrSEventGetKeyInput(atom evt)
+
+ return c_func(xirrSEventGetKeyInput,{evt})
+	
+end function
+
+public constant xirrSKeyInputGetKey = define_c_func(irr,"irrSKeyInputGetKey",{C_POINTER},C_POINTER)
+
+public function irrSKeyInputGetKey(atom evt)
+
+ return c_func(xirrSKeyInputGetKey,{evt})
+	
+end function
+
+public constant xirrSKeyInputIsPressed = define_c_func(irr,"irrSKeyInputIsPressed",{C_POINTER},C_BOOL)
+
+public function irrSKeyInputIsPressed(atom evt)
+
+ return c_func(xirrSKeyInputIsPressed,{evt})
+	
+end function
+
+public constant xirrSGUIEventGetCaller = define_c_func(irr,"irrSGUIEventGetCaller",{C_POINTER},C_POINTER)
+
+public function irrSGUIEventGetCaller(atom evt)
+
+ return c_func(xirrSGUIEventGetCaller,{evt})
+	
+end function
+
+public constant xirrSGUIEventGetElement = define_c_func(irr,"irrSGUIEventGetElement",{C_POINTER},C_POINTER)
+
+public function irrSGUIEventGetElement(atom evt)
+
+ return c_func(xirrSGUIEventGetElement,{evt})
+	
+end function
+
+public constant xirrSGUIEventGetEventType = define_c_func(irr,"irrSGUIEventGetEventType",{C_POINTER},C_POINTER)
+
+public function irrSGUIEventGetEventType(atom evt)
+
+ return c_func(xirrSGUIEventGetEventType,{evt})
+	
+end function
+
+public constant xirrSGUIEventIsEventType = define_c_func(irr,"irrSGUIEventIsEventType",{C_POINTER,C_POINTER},C_BOOL)
+
+public function irrSGUIEventIsEventType(atom evt,atom xtype)
+
+ return c_func(xirrSGUIEventIsEventType,{evt,xtype})
+	
+end function
+
+--Irr Key Code
+
+public constant xirrEKeyCodeEqual = define_c_func(irr,"irrEKeyCodeEqual",{C_POINTER,C_POINTER},C_BOOL)
+
+public function irrEKeyCodeEqual(atom code,atom code2)
+
+ return c_func(xirrEKeyCodeEqual,{code,code2})
+	
+end function
+
+--ISceneNode Animator
+
+public constant xirrISceneNodeAnimatorGetIReferenceCounted = define_c_func(irr,"irrISceneNodeAnimatorGetIReferenceCounted",{C_POINTER},C_POINTER)
+
+public function irrISceneNodeAnimatorGetIReferenceCounted(atom node)
+
+ return c_func(xirrISceneNodeAnimatorGetIReferenceCounted,{node})
+	
+end function
+
+--IAnimatedMeshSceneNode
+
+public constant xirrIAnimatedMeshSceneNodeGetSceneNode = define_c_func(irr,"irrIAnimatedMeshSceneNodeGetSceneNode",{C_POINTER},C_POINTER)
+
+public function irrIAnimatedMeshSceneNodeGetSceneNode(atom node)
+
+ return c_func(xirrIAnimatedMeshSceneNodeGetSceneNode,{node})
+	
+end function
+
+public constant xirrIAnimatedMeshSceneNodeSetFrameLoop = define_c_func(irr,"irrIAnimatedMeshSceneNodeSetFrameLoop",{C_POINTER,C_INT,C_INT},C_BOOL)
+
+public function irrIAnimatedMeshSceneNodeSetFrameLoop(atom node,atom x,atom x2)
+
+ return c_func(xirrIAnimatedMeshSceneNodeSetFrameLoop,{node,x,x2})
+	
+end function
+
+public constant xirrIAnimatedMeshSceneNodeSetAnimationSpeed = define_c_proc(irr,"irrIAnimatedMeshSceneNodeSetAnimationSpeed",{C_POINTER,C_FLOAT})
+
+public procedure irrIAnimatedMeshSceneNodeSetAnimationSpeed(atom node,atom speed)
+
+ c_proc(xirrIAnimatedMeshSceneNodeSetAnimationSpeed,{node,speed})
+	
+end procedure
+
+--ITimer
+public constant xirrITimerGetTime = define_c_func(irr,"irrITimerGetTime",{C_POINTER},C_UINT)
+
+public function irrITimerGetTime(atom xtime)
+
+ return c_func(xirrITimerGetTime,{xtime})
+	
+end function
+
+--Video drivers
+
+public constant xirr_video_EDT_NULL = define_c_func(irr,"irr_video_EDT_NULL",{},C_POINTER)
+
+public function irr_video_EDT_NULL()
+
+ return c_func(xirr_video_EDT_NULL,{})
+	
+end function
+
+public constant xirr_video_EDT_SOFTWARE = define_c_func(irr,"irr_video_EDT_SOFTWARE",{},C_POINTER)
+
+public function irr_video_EDT_SOFTWARE()
+
+ return c_func(xirr_video_EDT_SOFTWARE,{})
+	
+end function
+
+public constant xirr_video_EDT_BURNINGSVIDEO = define_c_func(irr,"irr_video_EDT_BURNINGSVIDEO",{},C_POINTER)
+
+public function irr_video_EDT_BURNINGSVIDEO()
+
+ return c_func(xirr_video_EDT_BURNINGSVIDEO,{})
+	
+end function
+
+public constant xirr_video_EDT_OPENGL = define_c_func(irr,"irr_video_EDT_OPENGL",{},C_POINTER)
+
+public function irr_video_EDT_OPENGL()
+
+ return c_func(xirr_video_EDT_OPENGL,{})
+	
+end function
+
+public constant xirr_video_EDT_DIRECTX9 = define_c_func(irr,"irr_video_EDT_DIRECTX9",{},C_POINTER)
+
+public function irr_video_EDT_DIRECTX9()
+
+ return c_func(xirr_video_EDT_DIRECTX9,{})
+	
+end function
+
+--IGUIEnviroment --again misspelled
+
+public constant xirrIGUIEnviromentDrawAll = define_c_proc(irr,"irrIGUIEnviromentDrawAll",{C_POINTER})
+
+public procedure irrIGUIEnviromentDrawAll(atom gui)
+
+ c_proc(xirrIGUIEnviromentDrawAll,{gui})
+	
+end procedure
+
+public constant xirrIGUIEnviromentAddStaticText = define_c_func(irr,"irrIGUIEnviromentAddStaticText",{C_POINTER,C_POINTER,C_POINTER,C_BOOL,C_BOOL,C_POINTER,C_INT,C_BOOL},C_POINTER)
+
+public function irrIGUIEnviromentAddStaticText(atom gui,sequence text,atom rect,integer border,integer word,atom par,atom id,integer fill)
+
+ atom str = allocate_wstring(text,1)
+ atom ret = c_func(xirrIGUIEnviromentAddStaticText,{gui,str,rect,border,word,par,id,fill})
+ 
+ return ret
+	
+end function
+
+public constant xirrIGUIEnviromentAddImage = define_c_func(irr,"irrIGUIEnviromentAddImage",{C_POINTER,C_POINTER,C_POINTER,C_BOOL},C_POINTER)
+
+public function irrIGUIEnviromentAddImage(atom env,atom img,atom pos,integer alpha)
+
+ return c_func(xirrIGUIEnviromentAddImage,{env,img,pos,alpha})
+	
+end function
+
+public constant xirrIGUIEnviromentAddButton = define_c_func(irr,"irrIGUIEnviromentAddButton",{C_POINTER},C_POINTER)
+
+public function irrIGUIEnviromentAddButton(atom env)
+
+ return c_func(xirrIGUIEnviromentAddButton,{env})
+	
+end function
+
+public constant xirrIGUIEnviromentSetLightTheme = define_c_proc(irr,"irrIGUIEnviromentSetLightTheme",{C_POINTER})
+
+public procedure irrIGUIEnviromentSetLightTheme(atom env)
+
+ c_proc(xirrIGUIEnviromentSetLightTheme,{env})
+	
+end procedure
+
+--CameraSceneNode
+
+public constant xirrICameraSceneNodeGetSceneNode = define_c_func(irr,"irrICameraSceneNodeGetSceneNode",{C_POINTER},C_POINTER)
+
+public function irrICameraSceneNodeGetSceneNode(atom node)
+
+ return c_func(xirrICameraSceneNodeGetSceneNode,{node})
+	
+end function
+
+--IFileSystem
+
+public constant xirrIFileSystemAddFileArchive = define_c_proc(irr,"irrIFileSystemAddFileArchive",{C_POINTER,C_POINTER,C_BOOL,C_BOOL})
+
+public procedure irrIFileSystemAddFileArchive(atom file,sequence name,integer ignore,integer ignore2)
+
+ atom str = allocate_string(name,1)
+ c_proc(xirrIFileSystemAddFileArchive,{file,str,ignore,ignore2})
+	
+end procedure
+
+--IGUIElement
+
+public constant xirrIGUIElementGetNull = define_c_func(irr,"irrIGUIElementGetNull",{},C_POINTER)
+
+public function irrIGUIElementGetNull()
+
+ return c_func(xirrIGUIElementGetNull,{})
+	
+end function
+
+public constant xirrIGUIElementSetID = define_c_proc(irr,"irrIGUIElementSetID",{C_POINTER,C_INT})
+
+public procedure irrIGUIElementSetID(atom gui,atom id)
+
+ c_proc(xirrIGUIElementSetID,{gui,id})
+	
+end procedure
+
+public constant xirrIGUIElementSetEnabled = define_c_proc(irr,"irrIGUIElementSetEnabled",{C_POINTER,C_BOOL})
+
+public procedure irrIGUIElementSetEnabled(atom gui,integer enable)
+
+ c_proc(xirrIGUIElementSetEnabled,{gui,enable})
+	
+end procedure
+
+public constant xirrIGUIElementSetText = define_c_proc(irr,"irrIGUIElementSetText",{C_POINTER,C_POINTER})
+
+public procedure irrIGUIElementSetText(atom gui,sequence text)
+
+ atom str = allocate_wstring(text,1)
+ c_proc(xirrIGUIElementSetText,{gui,str})
+	
+end procedure
+
+public constant xirrIGUIElementSetRelativePosition = define_c_proc(irr,"irrIGUIElementSetRelativePosition",{C_POINTER,C_INT,C_INT})
+
+public procedure irrIGUIElementSetRelativePosition(atom gui,atom x,atom y)
+
+ c_proc(xirrIGUIElementSetRelativePosition,{gui,x,y})
+	
+end procedure
+
+public constant xirrIGUIElementSetRelativePositionRect = define_c_proc(irr,"irrIGUIElementSetRelativePositionRect",{C_POINTER,C_INT,C_INT,C_INT,C_INT})
+
+public procedure irrIGUIElementSetRelativePositionRect(atom gui,atom x,atom y,atom x2,atom y2)
+
+ c_proc(xirrIGUIElementSetRelativePositionRect,{gui,x,y,x2,y2})
+	
+end procedure
+
+public constant xirrIGUIElementSetMinSize = define_c_proc(irr,"irrIGUIElementSetMinSize",{C_POINTER,C_UINT,C_UINT})
+
+public procedure irrIGUIElementSetMinSize(atom gui,atom w,atom h)
+
+ c_proc(xirrIGUIElementSetMinSize,{gui,w,h})
+	
+end procedure
+
+public constant xirrIGUIElementSetMaxSize = define_c_proc(irr,"irrIGUIElementSetMaxSize",{C_POINTER,C_UINT,C_UINT})
+
+public procedure irrIGUIElementSetMaxSize(atom gui,atom w,atom h)
+
+ c_proc(xirrIGUIElementSetMaxSize,{gui,w,h})
+	
+end procedure
+
+public constant xirrIGUIElementSetName = define_c_proc(irr,"irrIGUIElementSetName",{C_POINTER,C_POINTER})
+
+public procedure irrIGUIElementSetName(atom gui,sequence name)
+
+ atom str = allocate_string(name,1)
+ c_proc(xirrIGUIElementSetName,{gui,str})
+	
+end procedure
+
+public constant xirrIGUIElementGetName = define_c_func(irr,"irrIGUIElementGetName",{C_POINTER},C_POINTER)
+
+public function irrIGUIElementGetName(atom gui)
+
+ return c_func(xirrIGUIElementGetName,{gui})
+	
+end function
+
+public constant xirrIGUIElementIs = define_c_func(irr,"irrIGUIElementIs",{C_POINTER,C_POINTER},C_BOOL)
+
+public function irrIGUIElementIs(atom gui,atom gui2)
+
+ return c_func(xirrIGUIElementIs,{gui,gui2})
+	
+end function
+
+--IGUIButton
+
+public constant xirrIGUIButtonGetIGUIElement = define_c_func(irr,"irrIGUIButtonGetIGUIElement",{C_POINTER},C_POINTER)
+
+public function irrIGUIButtonGetIGUIElement(atom btn)
+
+ return c_func(xirrIGUIButtonGetIGUIElement,{btn})
+	
+end function
+
+--IMeshSceneNode
+
+public constant xirrIMeshSceneNodeGetSceneNode = define_c_func(irr,"irrIMeshSceneNodeGetSceneNode",{C_POINTER},C_POINTER)
+
+public function irrIMeshSceneNodeGetSceneNode(atom node)
+
+ return c_func(xirrIMeshSceneNodeGetSceneNode,{node})
+	
+end function
+
+--ICursor
+
+public constant xirrICursorControlSetPositionRelative = define_c_proc(irr,"irrICursorControlSetPositionRelative",{C_POINTER,C_FLOAT,C_FLOAT})
+
+public procedure irrICursorControlSetPositionRelative(atom cur,atom x,atom y)
+
+ c_proc(xirrICursorControlSetPositionRelative,{cur,x,y})
+	
+end procedure
+
+public constant xirrICursorControlGetPositionRelativeX = define_c_func(irr,"irrICursorControlGetPositionRelativeX",{C_POINTER},C_FLOAT)
+
+public function irrICursorControlGetPositionRelativeX(atom cur)
+
+ return c_func(xirrICursorControlGetPositionRelativeX,{cur})
+	
+end function
+
+public constant xirrICursorControlGetPositionRelativeY = define_c_func(irr,"irrICursorControlGetPositionRelativeY",{C_POINTER},C_FLOAT)
+
+public function irrICursorControlGetPositionRelativeY(atom cur)
+
+ return c_func(xirrICursorControlGetPositionRelativeY,{cur})
+	
+end function
+
+public constant xirrICursorControlSetPositionAbsolute = define_c_proc(irr,"irrICursorControlSetPositionAbsolute",{C_POINTER,C_INT,C_INT})
+
+public procedure irrICursorControlSetPositionAbsolute(atom cur,atom x,atom xabs)
+
+ c_proc(xirrICursorControlSetPositionAbsolute,{cur,x,xabs})
+	
+end procedure
+
+--Another typo
+public constant xirrICursorControlGetPositionAbosluteX = define_c_func(irr,"irrICursorControlGetPositionAbosluteX",{C_POINTER},C_INT)
+
+public function irrICursorControlGetPositionAbosluteX(atom cur)
+
+ return c_func(xirrICursorControlGetPositionAbosluteX,{cur})
+	
+end function
+
+--Same as X, typo
+public constant xirrICursorControlGetPositionAbosluteY = define_c_func(irr,"irrICursorControlGetPositionAbosluteY",{C_POINTER},C_INT)
+
+public function irrICursorControlGetPositionAbosluteY(atom cur)
+
+ return c_func(xirrICursorControlGetPositionAbosluteY,{cur})
+	
+end function
+
+public constant xirrICursorControlSetVisible = define_c_proc(irr,"irrICursorControlSetVisible",{C_POINTER,C_BOOL})
+
+public procedure irrICursorControlSetVisible(atom cur,integer vis)
+
+ c_proc(xirrICursorControlSetVisible,{cur,vis})
+	
+end procedure
+
+--IReferenceCounted
+
+public constant xirrIReferenceCountedGrab = define_c_proc(irr,"irrIReferenceCountedGrab",{C_POINTER})
+
+public procedure irrIReferenceCountedGrab(atom ref)
+
+ c_proc(xirrIReferenceCountedGrab,{ref})
+	
+end procedure
+
+public constant xirrIReferenceCountedDrop = define_c_func(irr,"irrIReferenceCountedDrop",{C_POINTER},C_BOOL)
+
+public function irrIReferenceCountedDrop(atom ref)
+
+ return c_func(xirrIReferenceCountedDrop,{ref})
+	
+end function
+
+public constant xirrIReferenceCountedGetReferenceCount = define_c_func(irr,"irrIReferenceCountedGetReferenceCount",{C_POINTER},C_INT)
+
+public function irrIReferenceCountedGetReferenceCount(atom ref)
+
+ return c_func(xirrIReferenceCountedGetReferenceCount,{ref})
+	
+end function
+
+--IrrImgui
+
+public constant xirrImguiBegin = define_c_func(irr,"irrImguiBegin",{C_POINTER,C_POINTER},C_BOOL)
+
+public function irrImguiBegin(sequence title,atom opened)
+
+ atom str = allocate_string(title,1)
+ atom ret = c_func(xirrImguiBegin,{str,opened})
+ 
+ return ret
+	
+end function
+
+public constant xirrImguiEnd = define_c_proc(irr,"irrImguiEnd",{})
+
+public procedure irrImguiEnd()
+
+ c_proc(xirrImguiEnd,{})
+	
+end procedure
+
+public constant xirrImguiRender = define_c_proc(irr,"irrImguiRender",{})
+
+public procedure irrImguiRender()
+
+ c_proc(xirrImguiRender,{})
+	
+end procedure
+
+public constant xirrImguiNewFrame = define_c_proc(irr,"irrImguiNewFrame",{})
+
+public procedure irrImguiNewFrame()
+
+ c_proc(xirrImguiNewFrame,{})
+	
+end procedure
+
+public constant xirrImguiText = define_c_proc(irr,"irrImguiText",{C_POINTER})
+
+public procedure irrImguiText(sequence text)
+
+ atom str = allocate_string(text)
+ c_proc(xirrImguiText,{str})
+	
+end procedure
+
+public constant xirrImguiTextBool = define_c_proc(irr,"irrImguiTextBool",{C_BOOL})
+
+public procedure irrImguiTextBool(integer txt)
+
+ c_proc(xirrImguiTextBool,{txt})
+	
+end procedure
+
+public constant xirrImguiTextInt = define_c_proc(irr,"irrImguiTextInt",{C_INT})
+
+public procedure irrImguiTextInt(atom text)
+
+ c_proc(xirrImguiTextInt,{text})
+	
+end procedure
+
+public constant xirrImguiTextUInt = define_c_proc(irr,"irrImguiTextUInt",{C_UINT})
+
+public procedure irrImguiTextUInt(atom text)
+
+ c_proc(xirrImguiTextUInt,{text})
+	
+end procedure
+
+public constant xirrImguiButton = define_c_func(irr,"irrImguiButton",{C_POINTER},C_BOOL)
+
+public function irrImguiButton(sequence text)
+
+ atom str = allocate_string(text)
+ atom ret = c_func(xirrImguiButton,{str})
+ 
+ return ret
+	
+end function
+
+public constant xirrImguiShowTestWindow = define_c_proc(irr,"irrImguiShowTestWindow",{})
+
+public procedure irrImguiShowTestWindow()
+
+ c_proc(xirrImguiShowTestWindow,{})
+	
+end procedure
+
+public constant xirrImguiGetWindowPos = define_c_proc(irr,"irrImguiGetWindowPos",{C_POINTER})
+
+public procedure irrImguiGetWindowPos(atom v)
+
+ c_proc(xirrImguiGetWindowPos,{v})
+	
+end procedure
+
+public constant xirrImguiGetWindowSize = define_c_proc(irr,"irrImguiGetWindowSize",{C_POINTER})
+
+public procedure irrImguiGetWindowSize(atom v)
+
+ c_proc(xirrImguiGetWindowSize,{v})
+	
+end procedure
+
+public constant xirrImguiSameLine = define_c_proc(irr,"irrImguiSameLine",{})
+
+public procedure irrImguiSameLine()
+
+ c_proc(xirrImguiSameLine,{})
+	
+end procedure
+
+public constant xirrImguiCombo = define_c_func(irr,"irrImguiCombo",{C_POINTER,C_POINTER,C_POINTER,C_INT},C_BOOL)
+
+public function irrImguiCombo(sequence xlabel,atom cur,sequence items,integer count)
+
+ atom str = allocate_string(xlabel,1)
+ atom str2 = allocate_string_pointer_array(items,1)
+ 
+ atom ret = c_func(xirrImguiCombo,{str,cur,str2,count})
+ 
+ return ret
+	
+end function
+
+public constant xirrImguiIsItemHovered = define_c_func(irr,"irrImguiIsItemHovered",{},C_BOOL)
+
+public function irrImguiIsItemHovered()
+
+ return c_func(xirrImguiIsItemHovered,{})
+	
+end function
+
+public constant xirrImguiGetItemRect = define_c_proc(irr,"irrImguiGetItemRect",{C_POINTER})
+
+public procedure irrImguiGetItemRect(atom rect)
+
+ c_proc(xirrImguiGetItemRect,{rect})
+	
+end procedure
+
+--EMaterial Flags
+
+public constant xirr_video_EMF_LIGHTING = define_c_func(irr,"irr_video_EMF_LIGHTING",{},C_POINTER)
+
+public function irr_video_EMF_LIGHTING()
+
+ return c_func(xirr_video_EMF_LIGHTING,{})
+	
+end function
+
+public constant xirr_video_EMF_WIREFRAME = define_c_func(irr,"irr_video_EMF_WIREFRAME",{},C_POINTER)
+
+public function irr_video_EMF_WIREFRAME()
+
+ return c_func(xirr_video_EMF_WIREFRAME,{})
+	
+end function
+
+public constant xirr_video_EMF_POINTCLOUD = define_c_func(irr,"irr_video_EMF_POINTCLOUD",{},C_POINTER)
+
+public function irr_video_EMF_POINTCLOUD()
+
+ return c_func(xirr_video_EMF_POINTCLOUD,{})
+	
+end function
+
+public constant xirr_video_EMF_GOURAUD_SHADING = define_c_func(irr,"irr_video_EMF_GOURAUD_SHADING",{},C_POINTER)
+
+public function irr_video_EMF_GOURAUD_SHADING()
+
+ return c_func(xirr_video_EMF_GOURAUD_SHADING,{})
+	
+end function
+
+public constant xirr_video_EMF_ZBUFFER = define_c_func(irr,"irr_video_EMF_ZBUFFER",{},C_POINTER)
+
+public function irr_video_EMF_ZBUFFER()
+
+ return c_func(xirr_video_EMF_ZBUFFER,{})
+	
+end function
+
+public constant xirr_video_EMF_ZWRITE_ENABLE = define_c_func(irr,"irr_video_EMF_ZWRITE_ENABLE",{},C_POINTER)
+
+public function irr_video_EMF_ZWRITE_ENABLE()
+
+ return c_func(xirr_video_EMF_ZWRITE_ENABLE,{})
+	
+end function
+
+public constant xirr_video_EMF_BACK_FACE_CULLING = define_c_func(irr,"irr_video_EMF_BACK_FACE_CULLING",{},C_POINTER)
+
+public function irr_video_EMF_BACK_FACE_CULLING()
+
+ return c_func(xirr_video_EMF_BACK_FACE_CULLING,{})
+	
+end function
+
+public constant xirr_video_EMF_FRONT_FACE_CULLING = define_c_func(irr,"irr_video_EMF_FRONT_FACE_CULLING",{},C_POINTER)
+
+public function irr_video_EMF_FRONT_FACE_CULLING()
+
+ return c_func(xirr_video_EMF_FRONT_FACE_CULLING,{})
+	
+end function
+
+public constant xirr_video_EMF_BILINEAR_FILTER = define_c_func(irr,"irr_video_EMF_BILINEAR_FILTER",{},C_POINTER)
+
+public function irr_video_EMF_BILINEAR_FILTER()
+
+ return c_func(xirr_video_EMF_BILINEAR_FILTER,{})
+	
+end function
+
+public constant xirr_video_EMF_TRILINEAR_FILTER = define_c_func(irr,"irr_video_EMF_TRILINEAR_FILTER",{},C_POINTER)
+
+public function irr_video_EMF_TRILINEAR_FILTER()
+
+ return c_func(xirr_video_EMF_TRILINEAR_FILTER,{})
+	
+end function
+
+public constant xirr_video_EMF_ANISOTROPIC_FILTER = define_c_func(irr,"irr_video_EMF_ANISOTROPIC_FILTER",{},C_POINTER)
+
+public function irr_video_EMF_ANISOTROPIC_FILTER()
+
+ return c_func(xirr_video_EMF_ANISOTROPIC_FILTER,{})
+	
+end function
+
+public constant xirr_video_EMF_FOG_ENABLE = define_c_func(irr,"irr_video_EMF_FOG_ENABLE",{},C_POINTER)
+
+public function irr_video_EMF_FOG_ENABLE()
+
+ return c_func(xirr_video_EMF_FOG_ENABLE,{})
+	
+end function
+
+public constant xirr_video_EMF_NORMALIZE_NORMALS = define_c_func(irr,"irr_video_EMF_NORMALIZE_NORMALS",{},C_POINTER)
+
+public function irr_video_EMF_NORMALIZE_NORMALS()
+
+ return c_func(xirr_video_EMF_NORMALIZE_NORMALS,{})
+	
+end function
+
+public constant xirr_video_EMF_TEXTURE_WRAP = define_c_func(irr,"irr_video_EMF_TEXTURE_WRAP",{},C_POINTER)
+
+public function irr_video_EMF_TEXTURE_WRAP()
+
+ return c_func(xirr_video_EMF_TEXTURE_WRAP,{})
+	
+end function
+
+public constant xirr_video_EMF_ANTI_ALIASING = define_c_func(irr,"irr_video_EMF_ANTI_ALIASING",{},C_POINTER)
+
+public function irr_video_EMF_ANTI_ALIASING()
+
+ return c_func(xirr_video_EMF_ANTI_ALIASING,{})
+	
+end function
+
+public constant xirr_video_EMF_COLOR_MASK = define_c_func(irr,"irr_video_EMF_COLOR_MASK",{},C_POINTER)
+
+public function irr_video_EMF_COLOR_MASK()
+
+ return c_func(xirr_video_EMF_COLOR_MASK,{})
+	
+end function
+
+public constant xirr_video_EMF_COLOR_MATERIAL = define_c_func(irr,"irr_video_EMF_COLOR_MATERIAL",{},C_POINTER)
+
+public function irr_video_EMF_COLOR_MATERIAL()
+
+ return c_func(xirr_video_EMF_COLOR_MATERIAL,{})
+	
+end function
+
+public constant xirr_video_EMF_USE_MIP_MAPS = define_c_func(irr,"irr_video_EMF_USE_MIP_MAPS",{},C_POINTER)
+
+public function irr_video_EMF_USE_MIP_MAPS()
+
+ return c_func(xirr_video_EMF_USE_MIP_MAPS,{})
+	
+end function
+
+public constant xirr_video_EMF_BLEND_OPERATION = define_c_func(irr,"irr_video_EMF_BLEND_OPERATION",{},C_POINTER)
+
+public function irr_video_EMF_BLEND_OPERATION()
+
+ return c_func(xirr_video_EMF_BLEND_OPERATION,{})
+	
+end function
+
+public constant xirr_video_EMF_POLYGON_OFFSET = define_c_func(irr,"irr_video_EMF_POLYGON_OFFSET",{},C_POINTER)
+
+public function irr_video_EMF_POLYGON_OFFSET()
+
+ return c_func(xirr_video_EMF_POLYGON_OFFSET,{})
+	
+end function
+
+--IigNode
+
+public constant xiigNodeGraphStart = define_c_proc(irr,"iigNodeGraphStart",{C_UINT,C_UINT,C_UINT})
+
+public procedure iigNodeGraphStart(atom layer,atom w,atom h)
+
+ c_proc(xiigNodeGraphStart,{layer,w,h})
+	
+end procedure
+
+public constant xiigNodeGraphEnd = define_c_proc(irr,"iigNodeGraphEnd",{})
+
+public procedure iigNodeGraphEnd()
+
+ c_proc(xiigNodeGraphEnd,{})
+	
+end procedure
+
+public constant xiigNodeGraphNode = define_c_proc(irr,"iigNodeGraphNode",{C_UINT,C_POINTER,C_POINTER,C_POINTER})
+
+public procedure iigNodeGraphNode(atom node,sequence name,atom x,atom y)
+
+ atom str = allocate_string(name)
+ c_proc(xiigNodeGraphNode,{node,str,x,y})
+	
+end procedure
+
+public constant xiigNodeGraphAttribute = define_c_proc(irr,"iigNodeGraphAttribute",{C_UINT,C_POINTER,C_BOOL})
+
+public procedure iigNodeGraphAttribute(atom id,sequence name,integer is)
+
+ atom str = allocate_string(name)
+ c_proc(xiigNodeGraphAttribute,{id,str,is})
+	
+end procedure
+
+public constant xiigNodeGraphInputConnect = define_c_func(irr,"iigNodeGraphInputConnect",{C_POINTER,C_POINTER},C_BOOL)
+
+public function iigNodeGraphInputConnect(atom id,atom attid)
+
+ return c_func(xiigNodeGraphInputConnect,{id,attid})
+	
+end function
+
+public constant xiigNodeGraphActionGroupStart = define_c_func(irr,"iigNodeGraphActionGroupStart",{C_POINTER},C_BOOL)
+
+public function iigNodeGraphActionGroupStart(sequence name)
+
+ atom str = allocate_string(name)
+ atom ret = c_func(xiigNodeGraphActionGroupStart,{str})
+ 
+ return ret
+	
+end function
+
+public constant xiigNodeGraphActionGroupEnd = define_c_proc(irr,"iigNodeGraphActionGroupEnd",{})
+
+public procedure iigNodeGraphActionGroupEnd()
+
+ c_proc(xiigNodeGraphActionGroupEnd,{})
+	
+end procedure
+
+public constant xiigNodeGraphActionValue = define_c_func(irr,"iigNodeGraphActionValue",{C_POINTER},C_BOOL)
+
+public function iigNodeGraphActionValue(sequence name)
+
+ atom str = allocate_string(name)
+ atom ret = c_func(xiigNodeGraphActionValue,{str})
+ 
+ return ret
+	
+end function
+
+--Audio functions
+
+public constant xiaInitialize = define_c_func(irr,"iaInitialize",{},C_BOOL)
+
+public function iaInitialize()
+
+ return c_func(xiaInitialize,{})
+	
+end function
+
+public constant xiaTerminate = define_c_func(irr,"iaTerminate",{},C_BOOL)
+
+public function iaTerminate()
+
+ return c_func(xiaTerminate,{})
+	
+end function
+
+public constant xiaDeviceCount = define_c_func(irr,"iaDeviceCount",{},C_UINT)
+
+public function iaDeviceCount()
+
+ return c_func(xiaDeviceCount,{})
+	
+end function
+
+public constant xiaDeviceInfoNew = define_c_func(irr,"iaDeviceInfoNew",{C_UINT},C_POINTER)
+
+public function iaDeviceInfoNew(atom dev)
+
+ return c_func(xiaDeviceInfoNew,{dev})
+	
+end function
+
+public constant xiaDeviceInfoDelete = define_c_proc(irr,"iaDeviceInfoDelete",{C_POINTER})
+
+public procedure iaDeviceInfoDelete(atom dev)
+
+ c_proc(xiaDeviceInfoDelete,{dev})
+	
+end procedure
+
+public constant xiaDeviceInfoName = define_c_func(irr,"iaDeviceInfoName",{C_POINTER},C_POINTER)
+
+public function iaDeviceInfoName(atom dev)
+
+ return c_func(xiaDeviceInfoName,{dev})
+	
+end function
+
+public constant xiaDeviceInfoProbed = define_c_func(irr,"iaDeviceInfoProbed",{C_POINTER},C_BOOL)
+
+public function iaDeviceInfoProbed(atom dev)
+
+ return c_func(xiaDeviceInfoProbed,{dev})
+	
+end function
+
+public constant xiaDeviceInfoInputChannels = define_c_func(irr,"iaDeviceInfoInputChannels",{C_POINTER},C_UINT)
+
+public function iaDeviceInfoInputChannels(atom dev)
+
+ return c_func(xiaDeviceInfoInputChannels,{dev})
+	
+end function
+
+public constant xiaDeviceOutputChannels = define_c_func(irr,"iaDeviceOutputChannels",{C_POINTER},C_UINT)
+
+public function iaDeviceOutputChannels(atom dev)
+
+ return c_func(xiaDeviceOutputChannels,{dev})
+	
+end function
+
+public constant xiaDeviceInfoDuplexChannels = define_c_func(irr,"iaDeviceInfoDuplexChannels",{C_POINTER},C_UINT)
+
+public function iaDeviceInfoDuplexChannels(atom dev)
+ 
+ return c_func(xiaDeviceInfoDuplexChannels,{dev})
+	
+end function
+
+public constant xiaDeviceInfoDefaultOutput = define_c_func(irr,"iaDeviceInfoDefaultOutput",{C_POINTER},C_BOOL)
+
+public function iaDeviceInfoDefaultOutput(atom dev)
+
+ return c_func(xiaDeviceInfoDefaultOutput,{dev})
+	
+end function
+
+public constant xiaDeviceInfoDefaultInput = define_c_func(irr,"iaDeviceInfoDefaultInput",{C_POINTER},C_BOOL)
+
+public function iaDeviceInfoDefaultInput(atom dev)
+
+ return c_func(xiaDeviceInfoDefaultInput,{dev})
+	
+end function
+
+--element events
+
+public constant xirr_EGET_ELEMENT_FOCUS_LOST = define_c_func(irr,"irr_EGET_ELEMENT_FOCUS_LOST",{},C_POINTER)
+
+public function irr_EGET_ELEMENT_FOCUS_LOST()
+
+ return c_func(xirr_EGET_ELEMENT_FOCUS_LOST,{})
+	
+end function
+
+public constant xirr_EGET_ELEMENT_FOCUSED = define_c_func(irr,"irr_EGET_ELEMENT_FOCUSED",{},C_POINTER)
+
+public function irr_EGET_ELEMENT_FOCUSED()
+
+ return c_func(xirr_EGET_ELEMENT_FOCUSED,{})
+	
+end function
+
+public constant xirr_EGET_ELEMENT_HOVERED = define_c_func(irr,"irr_EGET_ELEMENT_HOVERED",{},C_POINTER)
+
+public function irr_EGET_ELEMENT_HOVERED()
+
+ return c_func(xirr_EGET_ELEMENT_HOVERED,{})
+	
+end function
+
+public constant xirr_EGET_ELEMENT_LEFT = define_c_func(irr,"irr_EGET_ELEMENT_LEFT",{},C_POINTER)
+
+public function irr_EGET_ELEMENT_LEFT()
+
+ return c_func(xirr_EGET_ELEMENT_LEFT,{})
+	
+end function
+
+public constant xirr_EGET_ELEMENT_CLOSED = define_c_func(irr,"irr_EGET_ELEMENT_CLOSED",{},C_POINTER)
+
+public function irr_EGET_ELEMENT_CLOSED()
+
+ return c_func(xirr_EGET_ELEMENT_CLOSED,{})
+	
+end function
+
+public constant xirr_EGET_BUTTON_CLICKED = define_c_func(irr,"irr_EGET_BUTTON_CLICKED",{},C_POINTER)
+
+public function irr_EGET_BUTTON_CLICKED()
+
+ return c_func(xirr_EGET_BUTTON_CLICKED,{})
+	
+end function
+
+public constant xirr_EGET_SCROLL_BAR_CHANGED = define_c_func(irr,"irr_EGET_ESCROLL_BAR_CHANGED",{},C_POINTER)
+
+public function irr_EGET_SCROLL_BAR_CHANGED()
+
+ return c_func(xirr_EGET_SCROLL_BAR_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_CHECKBOX_CHANGED = define_c_func(irr,"irr_EGET_CHECKBOX_CHANGED",{},C_POINTER)
+
+public function irr_EGET_CHECKBOX_CHANGED()
+
+ return c_func(xirr_EGET_CHECKBOX_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_LISTBOX_CHANGED = define_c_func(irr,"irr_EGET_LISTBOX_CHANGED",{},C_POINTER)
+
+public function irr_EGET_LISTBOX_CHANGED()
+
+ return c_func(xirr_EGET_LISTBOX_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_LISTBOX_SELECTED_AGAIN = define_c_func(irr,"irr_EGET_LISTBOX_SELECTED_AGAIN",{},C_POINTER)
+
+public function irr_EGET_LISTBOX_SELECTED_AGAIN()
+
+ return c_func(xirr_EGET_LISTBOX_SELECTED_AGAIN,{})
+	
+end function
+
+public constant xirr_EGET_FILE_SELECTED = define_c_func(irr,"irr_EGET_FILE_SELECTED",{},C_POINTER)
+
+public function irr_EGET_FILE_SELECTED()
+
+ return c_func(xirr_EGET_FILE_SELECTED,{})
+	
+end function
+
+public constant xirr_EGET_DIRECTORY_SELECTED = define_c_func(irr,"irr_EGET_DIRECTORY_SELECTED",{},C_POINTER)
+
+public function irr_EGET_DIRECTORY_SELECTED()
+
+ return c_func(xirr_EGET_DIRECTORY_SELECTED,{})
+	
+end function
+
+public constant xirr_EGET_FILE_CHOOSE_DIALOG_CANCELLED = define_c_func(irr,"irr_EGET_FILE_CHOOSE_DIALOG_CANCELLED",{},C_POINTER)
+
+public function irr_EGET_FILE_CHOOSE_DIALOG_CANCELLED()
+
+ return c_func(xirr_EGET_FILE_CHOOSE_DIALOG_CANCELLED,{})
+	
+end function
+
+public constant xirr_EGET_MESSAGEBOX_YES = define_c_func(irr,"irr_EGET_MESSAGEBOX_YES",{},C_POINTER)
+
+public function irr_EGET_MESSAGEBOX_YES()
+
+ return c_func(xirr_EGET_MESSAGEBOX_YES,{})
+	
+end function
+
+public constant xirr_EGET_MESSAGEBOX_NO = define_c_func(irr,"irr_EGET_MESSAGEBOX_NO",{},C_POINTER)
+
+public function irr_EGET_MESSAGEBOX_NO()
+
+ return c_func(xirr_EGET_MESSAGEBOX_NO,{})
+	
+end function
+
+public constant xirr_EGET_MESSAGEBOX_CANCEL = define_c_func(irr,"irr_EGET_MESSAGEBOX_CANCEL",{},C_POINTER)
+
+public function irr_EGET_MESSAGEBOX_CANCEL()
+
+ return c_func(xirr_EGET_MESSAGEBOX_CANCEL,{})
+	
+end function
+
+public constant xirr_EGET_EDITBOX_ENTER = define_c_func(irr,"irr_EGET_EDITBOX_ENTER",{},C_POINTER)
+
+public function irr_EGET_EDITBOX_ENTER()
+
+ return c_func(xirr_EGET_EDITBOX_ENTER,{})
+	
+end function
+
+public constant xirr_EGET_EDITBOX_CHANGED = define_c_func(irr,"irr_EGET_EDITBOX_CHANGED",{},C_POINTER)
+
+public function irr_EGET_EDITBOX_CHANGED()
+
+ return c_func(xirr_EGET_EDITBOX_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_EDITBOX_MARKING_CHANGED = define_c_func(irr,"irr_EGET_EDITBOX_MARKING_CHANGED",{},C_POINTER)
+
+public function irr_EGET_EDITBOX_MARKING_CHANGED()
+
+ return c_func(xirr_EGET_EDITBOX_MARKING_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_TAB_CHANGED = define_c_func(irr,"irr_EGET_TAB_CHANGED",{},C_POINTER)
+
+public function irr_EGET_TAB_CHANGED()
+
+ return c_func(xirr_EGET_TAB_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_MENU_ITEM_SELECTED = define_c_func(irr,"irr_EGET_MENU_ITEM_SELECTED",{},C_POINTER)
+
+public function irr_EGET_MENU_ITEM_SELECTED()
+
+ return c_func(xirr_EGET_MENU_ITEM_SELECTED,{})
+	
+end function
+
+public constant xirr_EGET_COMBO_BOX_CHANGED = define_c_func(irr,"irr_EGET_COMBO_BOX_CHANGED",{},C_POINTER)
+
+public function irr_EGET_COMBO_BOX_CHANGED()
+
+ return c_func(xirr_EGET_COMBO_BOX_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_SPINBOX_CHANGED = define_c_func(irr,"irr_EGET_SPINBOX_CHANGED",{},C_POINTER)
+
+public function irr_EGET_SPINBOX_CHANGED()
+
+ return c_func(xirr_EGET_SPINBOX_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_TABLE_CHANGED = define_c_func(irr,"irr_EGET_TABLE_CHANGED",{},C_POINTER)
+
+public function irr_EGET_TABLE_CHANGED()
+
+ return c_func(xirr_EGET_TABLE_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_TABLE_HEADER_CHANGED = define_c_func(irr,"irr_EGET_TABLE_HEADER_CHANGED",{},C_POINTER)
+
+public function irr_EGET_TABLE_HEADER_CHANGED()
+
+ return c_func(xirr_EGET_TABLE_HEADER_CHANGED,{})
+	
+end function
+
+public constant xirr_EGET_TREEVIEW_NODE_DESELECT = define_c_func(irr,"irr_EGET_TREEVIEW_NODE_DESELECT",{},C_POINTER)
+
+public function irr_EGET_TREEVIEW_NODE_DESELECT()
+
+ return c_func(xirr_EGET_TREEVIEW_NODE_DESELECT,{})
+	
+end function
+
+public constant xirr_EGET_TREEVIEW_NODE_SELECT = define_c_func(irr,"irr_EGET_TREEVIEW_NODE_SELECT",{},C_POINTER)
+
+public function irr_EGET_TREEVIEW_NODE_SELECT()
+
+ return c_func(xirr_EGET_TREEVIEW_NODE_SELECT,{})
+	
+end function
+
+public constant xirr_EGET_TREEVIEW_NODE_EXPAND = define_c_func(irr,"irr_EGET_TREEVIEW_NODE_EXPAND",{},C_POINTER)
+
+public function irr_EGET_TREEVIEW_NODE_EXPAND()
+
+ return c_func(xirr_EGET_TREEVIEW_NODE_EXPAND,{})
+	
+end function
+
+public constant xirr_EGET_TREEVIEW_NODE_COLLAPSE = define_c_func(irr,"irr_EGET_TREEVIEW_NODE_COLLAPSE",{},C_POINTER)
+
+public function irr_EGET_TREEVIEW_NODE_COLLAPSE()
+
+ return c_func(xirr_EGET_TREEVIEW_NODE_COLLAPSE,{})
+	
+end function
+
+--Keycode functions
+
+public constant xirrEKeyCodeKeyLButton = define_c_func(irr,"irr_EKEY_CODE_KEY_LBUTTON",{},C_POINTER)
+
+public function irrEKeyCodeKeyLButton()
+
+ return c_func(xirrEKeyCodeKeyLButton,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyRButton = define_c_func(irr,"irr_EKEY_CODE_KEY_RBUTTON",{},C_POINTER)
+
+public function irrEKeyCodeKeyRButton()
+
+ return c_func(xirrEKeyCodeKeyRButton,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyCancel = define_c_func(irr,"irr_EKEY_CODE_KEY_CANCEL",{},C_POINTER)
+
+public function irrEKeyCodeKeyCancel()
+
+ return c_func(xirrEKeyCodeKeyCancel,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyMButton = define_c_func(irr,"irr_EKEY_CODE_KEY_MBUTTON",{},C_POINTER)
+
+public function irrEKeyCodeKeyMButton()
+
+ return c_func(xirrEKeyCodeKeyMButton,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyXButton1 = define_c_func(irr,"irr_EKEY_CODE_KEY_XBUTTON1",{},C_POINTER)
+
+public function irrEKeyCodeKeyXButton1()
+
+ return c_func(xirrEKeyCodeKeyXButton1,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyXButton2 = define_c_func(irr,"irr_EKEY_CODE_KEY_XBUTTON2",{},C_POINTER)
+
+public function irrEKeyCodeKeyXButton2()
+
+ return c_func(xirrEKeyCodeKeyXButton2,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyBack = define_c_func(irr,"irr_EKEY_CODE_KEY_BACK",{},C_POINTER)
+
+public function irrEKeyCodeKeyBack()
+
+ return c_func(xirrEKeyCodeKeyBack,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyTab = define_c_func(irr,"irr_EKEY_CODE_KEY_TAB",{},C_POINTER)
+
+public function irrEKeyCodeKeyTab()
+
+ return c_func(xirrEKeyCodeKeyTab,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyClear = define_c_func(irr,"irr_EKEY_CODE_KEY_CLEAR",{},C_POINTER)
+
+public function irrEKeyCodeKeyClear()
+
+ return c_func(xirrEKeyCodeKeyClear,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyReturn = define_c_func(irr,"irr_EKEY_CODE_KEY_RETURN",{},C_POINTER)
+
+public function irrEKeyCodeKeyReturn()
+
+ return c_func(xirrEKeyCodeKeyReturn,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyShift = define_c_func(irr,"irr_EKEY_CODE_KEY_SHIFT",{},C_POINTER)
+
+public function irrEKeyCodeKeyShift()
+
+ return c_func(xirrEKeyCodeKeyShift,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyControl = define_c_func(irr,"irr_EKEY_CODE_KEY_CONTROL",{},C_POINTER)
+
+public function irrEKeyCodeKeyControl()
+
+ return c_func(xirrEKeyCodeKeyControl,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyMenu = define_c_func(irr,"irr_EKEY_CODE_KEY_MENU",{},C_POINTER)
+
+public function irrEKeyCodeKeyMenu()
+
+ return c_func(xirrEKeyCodeKeyMenu,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyPause = define_c_func(irr,"irr_EKEY_CODE_KEY_PAUSE",{},C_POINTER)
+
+public function irrEKeyCodeKeyPause()
+
+ return c_func(xirrEKeyCodeKeyPause,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyCapital = define_c_func(irr,"irr_EKEY_CODE_KEY_CAPITAL",{},C_POINTER)
+
+public function irrEKeyCodeKeyCapital()
+
+ return c_func(xirrEKeyCodeKeyCapital,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyKana = define_c_func(irr,"irr_EKEY_CODE_KEY_KANA",{},C_POINTER)
+
+public function irrEKeyCodeKeyKana()
+
+ return c_func(xirrEKeyCodeKeyKana,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyHanguel = define_c_func(irr,"irr_EKEY_CODE_KEY_HANGUEL",{},C_POINTER)
+
+public function irrEKeyCodeKeyHanguel()
+
+ return c_func(xirrEKeyCodeKeyHanguel,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyHangul = define_c_func(irr,"irr_EKEY_CODE_KEY_HANGUL",{},C_POINTER)
+
+public function irrEKeyCodeKeyHangul()
+
+ return c_func(xirrEKeyCodeKeyHangul,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyJunja = define_c_func(irr,"irr_EKEY_CODE_KEY_JUNJA",{},C_POINTER)
+
+public function irrEKeyCodeKeyJunja()
+
+ return c_func(xirrEKeyCodeKeyJunja,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyFinal = define_c_func(irr,"irr_EKEY_CODE_KEY_FINAL",{},C_POINTER)
+
+public function irrEKeyCodeKeyFinal()
+
+ return c_func(xirrEKeyCodeKeyFinal,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyHanja = define_c_func(irr,"irr_EKEY_CODE_KEY_HANJA",{},C_POINTER)
+
+public function irrEKeyCodeKeyHanja()
+
+ return c_func(xirrEKeyCodeKeyHanja,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyKanji = define_c_func(irr,"irr_EKEY_CODE_KEY_KANJI",{},C_POINTER)
+
+public function irrEKeyCodeKeyKanji()
+
+ return c_func(xirrEKeyCodeKeyKanji,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyEscape = define_c_func(irr,"irr_EKEY_CODE_KEY_ESCAPE",{},C_POINTER)
+
+public function irrEKeyCodeKeyEscape()
+
+ return c_func(xirrEKeyCodeKeyEscape,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyConvert = define_c_func(irr,"irr_EKEY_CODE_KEY_CONVERT",{},C_POINTER)
+
+public function irrEKeyCodeKeyConvert()
+
+ return c_func(xirrEKeyCodeKeyConvert,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyNonConvert = define_c_func(irr,"irr_EKEY_CODE_KEY_NONCONVERT",{},C_POINTER)
+
+public function irrEKeyCodeKeyNonConvert()
+
+ return c_func(xirrEKeyCodeKeyNonConvert,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyAccept = define_c_func(irr,"irr_EKEY_CODE_KEY_ACCEPT",{},C_POINTER)
+
+public function irrEKeyCodeKeyAccept()
+
+ return c_func(xirrEKeyCodeKeyAccept,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyModeChange = define_c_func(irr,"irr_EKEY_CODE_KEY_MODECHANGE",{},C_POINTER)
+
+public function irrEKeyCodeKeyModeChange()
+
+ return c_func(xirrEKeyCodeKeyModeChange,{})
+	
+end function
+
+public constant xirrEKeyCodeKeySpace = define_c_func(irr,"irr_EKEY_CODE_KEY_SPACE",{},C_POINTER)
+
+public function irrEKeyCodeKeySpace()
+
+ return c_func(xirrEKeyCodeKeySpace,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyPrior = define_c_func(irr,"irr_EKEY_CODE_KEY_PRIOR",{},C_POINTER)
+
+public function irrEKeyCodeKeyPrior()
+
+ return c_func(xirrEKeyCodeKeyPrior,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyNext = define_c_func(irr,"irr_EKEY_CODE_KEY_NEXT",{},C_POINTER)
+
+public function irrEKeyCodeKeyNext()
+
+ return c_func(xirrEKeyCodeKeyNext,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyEnd = define_c_func(irr,"irr_EKEY_CODE_KEY_END",{},C_POINTER)
+
+public function irrEKeyCodeKeyEnd()
+
+ return c_func(xirrEKeyCodeKeyEnd,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyHome = define_c_func(irr,"irr_EKEY_CODE_KEY_HOME",{},C_POINTER)
+
+public function irrEKeyCodeKeyHome()
+
+ return c_func(xirrEKeyCodeKeyHome,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyLeft = define_c_func(irr,"irr_EKEY_CODE_KEY_LEFT",{},C_POINTER)
+
+public function irrEKeyCodeKeyLeft()
+
+ return c_func(xirrEKeyCodeKeyLeft,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyRight = define_c_func(irr,"irr_EKEY_CODE_KEY_RIGHT",{},C_POINTER)
+
+public function irrEKeyCodeKeyRight()
+
+ return c_func(xirrEKeyCodeKeyRight,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyUp = define_c_func(irr,"irr_EKEY_CODE_KEY_UP",{},C_POINTER)
+
+public function irrEKeyCodeKeyUp()
+
+ return c_func(xirrEKeyCodeKeyUp,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyDown = define_c_func(irr,"irr_EKEY_CODE_KEY_DOWN",{},C_POINTER)
+
+public function irrEKeyCodeKeyDown()
+
+ return c_func(xirrEKeyCodeKeyDown,{})
+	
+end function
+
+public constant xirrEKeyCodeKeySelect = define_c_func(irr,"irr_EKEY_CODE_KEY_SELECT",{},C_POINTER)
+
+public function irrEKeyCodeKeySelect()
+
+ return c_func(xirrEKeyCodeKeySelect,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyPrint = define_c_func(irr,"irr_EKEY_CODE_KEY_PRINT",{},C_POINTER)
+
+public function irrEKeyCodeKeyPrint()
+
+ return c_func(xirrEKeyCodeKeyPrint,{})
+	
+end function
+
+--I believe this is supposed to be execute, but of course typo
+public constant xirrEKeyCodeKeyExecut = define_c_func(irr,"irr_EKEY_CODE_KEY_EXECUT",{},C_POINTER)
+
+public function irrEKeyCodeKeyExecut()
+
+ return c_func(xirrEKeyCodeKeyExecut,{})
+	
+end function
+
+public constant xirrEKeyCodeKeySnapshot = define_c_func(irr,"irr_EKEY_CODE_KEY_SNAPSHOT",{},C_POINTER)
+
+public function irrEKeyCodeKeySnapshot()
+
+ return c_func(xirrEKeyCodeKeySnapshot,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyInsert = define_c_func(irr,"irr_EKEY_CODE_KEY_INSERT",{},C_POINTER)
+
+public function irrEKeyCodeKeyInsert()
+
+ return c_func(xirrEKeyCodeKeyInsert,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyDelete = define_c_func(irr,"irr_EKEY_CODE_KEY_DELETE",{},C_POINTER)
+
+public function irrEKeyCodeKeyDelete()
+
+ return c_func(xirrEKeyCodeKeyDelete,{})
+	
+end function
+
+public constant xirrEKeyCodeKeyHelp = define_c_func(irr,"irr_EKEY_CODE_KEY_HELP",{},C_POINTER)
+
+public function irrEKeyCodeKeyHelp()
+
+ return c_func(xirrEKeyCodeKeyHelp,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_0 = define_c_func(irr,"irr_EKEY_CODE_KEY_0",{},C_POINTER)
+
+public function irrEKeyCodeKey_0()
+
+ return c_func(xirrEKeyCodeKey_0,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_1 = define_c_func(irr,"irr_EKEY_CODE_KEY_1",{},C_POINTER)
+
+public function irrEKeyCodeKey_1()
+
+ return c_func(xirrEKeyCodeKey_1,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_2 = define_c_func(irr,"irr_EKEY_CODE_KEY_2",{},C_POINTER)
+
+public function irrEKeyCodeKey_2()
+
+ return c_func(xirrEKeyCodeKey_2,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_3 = define_c_func(irr,"irr_EKEY_CODE_KEY_3",{},C_POINTER)
+
+public function irrEKeyCodeKey_3()
+
+ return c_func(xirrEKeyCodeKey_3,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_4 = define_c_func(irr,"irr_EKEY_CODE_KEY_4",{},C_POINTER)
+
+public function irrEKeyCodeKey_4()
+
+ return c_func(xirrEKeyCodeKey_4,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_5 = define_c_func(irr,"irr_EKEY_CODE_KEY_5",{},C_POINTER)
+
+public function irrEKeyCodeKey_5()
+
+ return c_func(xirrEKeyCodeKey_5,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_6 = define_c_func(irr,"irr_EKEY_CODE_KEY_6",{},C_POINTER)
+
+public function irrEKeyCodeKey_6()
+
+ return c_func(xirrEKeyCodeKey_6,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_7 = define_c_func(irr,"irr_EKEY_CODE_KEY_7",{},C_POINTER)
+
+public function irrEKeyCodeKey_7()
+
+ return c_func(xirrEKeyCodeKey_7,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_8 = define_c_func(irr,"irr_EKEY_CODE_KEY_8",{},C_POINTER)
+
+public function irrEKeyCodeKey_8()
+
+ return c_func(xirrEKeyCodeKey_8,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_9 = define_c_func(irr,"irr_EKEY_CODE_KEY_9",{},C_POINTER)
+
+public function irrEKeyCodeKey_9()
+
+ return c_func(xirrEKeyCodeKey_9,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_A = define_c_func(irr,"irr_EKEY_CODE_KEY_A",{},C_POINTER)
+
+public function irrEKeyCodeKey_A()
+
+ return c_func(xirrEKeyCodeKey_A,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_B = define_c_func(irr,"irr_EKEY_CODE_KEY_B",{},C_POINTER)
+
+public function irrEKeyCodeKey_B()
+
+ return c_func(xirrEKeyCodeKey_B,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_C = define_c_func(irr,"irr_EKEY_CODE_KEY_C",{},C_POINTER)
+
+public function irrEKeyCodeKey_C()
+
+ return c_func(xirrEKeyCodeKey_C,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_D = define_c_func(irr,"irr_EKEY_CODE_KEY_D",{},C_POINTER)
+
+public function irrEKeyCodeKey_D()
+
+ return c_func(xirrEKeyCodeKey_D,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_E = define_c_func(irr,"irr_EKEY_CODE_KEY_E",{},C_POINTER)
+
+public function irrEKeyCodeKey_E()
+
+ return c_func(xirrEKeyCodeKey_E,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_F = define_c_func(irr,"irr_EKEY_CODE_KEY_F",{},C_POINTER)
+
+public function irrEKeyCodeKey_F()
+
+ return c_func(xirrEKeyCodeKey_F,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_G = define_c_func(irr,"irr_EKEY_CODE_KEY_G",{},C_POINTER)
+
+public function irrEKeyCodeKey_G()
+
+ return c_func(xirrEKeyCodeKey_G,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_H = define_c_func(irr,"irr_EKEY_CODE_KEY_H",{},C_POINTER)
+
+public function irrEKeyCodeKey_H()
+
+ return c_func(xirrEKeyCodeKey_H,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_I = define_c_func(irr,"irr_EKEY_CODE_KEY_I",{},C_POINTER)
+
+public function irrEKeyCodeKey_I()
+
+ return c_func(xirrEKeyCodeKey_I,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_J = define_c_func(irr,"irr_EKEY_CODE_KEY_J",{},C_POINTER)
+
+public function irrEKeyCodeKey_J()
+
+ return c_func(xirrEKeyCodeKey_J,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_K = define_c_func(irr,"irr_EKEY_CODE_KEY_K",{},C_POINTER)
+
+public function irrEKeyCodeKey_K()
+
+ return c_func(xirrEKeyCodeKey_K,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_L = define_c_func(irr,"irr_EKEY_CODE_KEY_L",{},C_POINTER)
+
+public function irrEKeyCodeKey_L()
+
+ return c_func(xirrEKeyCodeKey_L,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_M = define_c_func(irr,"irr_EKEY_CODE_KEY_M",{},C_POINTER)
+
+public function irrEKeyCodeKey_M()
+
+ return c_func(xirrEKeyCodeKey_M,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_N = define_c_func(irr,"irr_EKEY_CODE_KEY_N",{},C_POINTER)
+
+public function irrEKeyCodeKey_N()
+
+ return c_func(xirrEKeyCodeKey_N,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_O = define_c_func(irr,"irr_EKEY_CODE_KEY_O",{},C_POINTER)
+
+public function irrEKeyCodeKey_O()
+
+ return c_func(xirrEKeyCodeKey_O,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_P = define_c_func(irr,"irr_EKEY_CODE_KEY_P",{},C_POINTER)
+
+public function irrEKeyCodeKey_P()
+
+ return c_func(xirrEKeyCodeKey_P,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_Q = define_c_func(irr,"irr_EKEY_CODE_KEY_Q",{},C_POINTER)
+
+public function irrEKeyCodeKey_Q()
+
+ return c_func(xirrEKeyCodeKey_Q,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_R = define_c_func(irr,"irr_EKEY_CODE_KEY_R",{},C_POINTER)
+
+public function irrEKeyCodeKey_R()
+
+ return c_func(xirrEKeyCodeKey_R,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_S = define_c_func(irr,"irr_EKEY_CODE_KEY_S",{},C_POINTER)
+
+public function irrEKeyCodeKey_S()
+
+ return c_func(xirrEKeyCodeKey_S,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_T = define_c_func(irr,"irr_EKEY_CODE_KEY_T",{},C_POINTER)
+
+public function irrEKeyCodeKey_T()
+
+ return c_func(xirrEKeyCodeKey_T,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_U = define_c_func(irr,"irr_EKEY_CODE_KEY_U",{},C_POINTER)
+
+public function irrEKeyCodeKey_U()
+
+ return c_func(xirrEKeyCodeKey_U,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_V = define_c_func(irr,"irr_EKEY_CODE_KEY_V",{},C_POINTER)
+
+public function irrEKeyCodeKey_V()
+
+ return c_func(xirrEKeyCodeKey_V,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_W = define_c_func(irr,"irr_EKEY_CODE_KEY_W",{},C_POINTER)
+
+public function irrEKeyCodeKey_W()
+
+ return c_func(xirrEKeyCodeKey_W,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_X = define_c_func(irr,"irr_EKEY_CODE_KEY_X",{},C_POINTER)
+
+public function irrEKeyCodeKey_X()
+
+ return c_func(xirrEKeyCodeKey_X,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_Y = define_c_func(irr,"irr_EKEY_CODE_KEY_Y",{},C_POINTER)
+
+public function irrEKeyCodeKey_Y()
+
+ return c_func(xirrEKeyCodeKey_Y,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_Z = define_c_func(irr,"irr_EKEY_CODE_KEY_Z",{},C_POINTER)
+
+public function irrEKeyCodeKey_Z()
+
+ return c_func(xirrEKeyCodeKey_Z,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_LWIN = define_c_func(irr,"irr_EKEY_CODE_KEY_LWIN",{},C_POINTER)
+
+public function irrEKeyCodeKey_LWIN()
+
+ return c_func(xirrEKeyCodeKey_LWIN,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_RWIN = define_c_func(irr,"irr_EKEY_CODE_KEY_RWIN",{},C_POINTER)
+
+public function irrEKeyCodeKey_RWIN()
+
+ return c_func(xirrEKeyCodeKey_RWIN,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_APPS = define_c_func(irr,"irr_EKEY_CODE_KEY_APPS",{},C_POINTER)
+
+public function irrEKeyCodeKey_APPS()
+
+ return c_func(xirrEKeyCodeKey_APPS,{})
+	
+end function
+
+public constant xirrEKeyCodeKey_Sleep = define_c_func(irr,"irr_EKEY_CODE_KEY_SLEEP",{},C_POINTER)
+
+public function irrEKeyCodeKey_Sleep()
+
+ return c_func(xirrEKeyCodeKey_Sleep,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD0 = define_c_func(irr,"irr_EKEYCODE_KEY_NUMPAD0",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD0()
+
+ return c_func(xirrEKeyCode_NUMPAD0,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD1 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD1",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD1()
+
+ return c_func(xirrEKeyCode_NUMPAD1,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD2 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD2",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD2()
+
+ return c_func(xirrEKeyCode_NUMPAD2,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD3 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD3",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD3()
+
+ return c_func(xirrEKeyCode_NUMPAD3,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD4 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD4",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD4()
+
+ return c_func(xirrEKeyCode_NUMPAD4,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD5 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD5",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD5()
+
+ return c_func(xirrEKeyCode_NUMPAD5,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD6 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD6",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD6()
+
+ return c_func(xirrEKeyCode_NUMPAD6,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD7 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD7",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD7()
+
+ return c_func(xirrEKeyCode_NUMPAD7,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD8 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD8",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD8()
+
+ return c_func(xirrEKeyCode_NUMPAD8,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMPAD9 = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMPAD9",{},C_POINTER)
+
+public function irrEKeyCode_NUMPAD9()
+
+ return c_func(xirrEKeyCode_NUMPAD9,{})
+	
+end function
+
+public constant xirrEKeyCode_Multiply = define_c_func(irr,"irr_EKEY_CODE_KEY_MULTIPLY",{},C_POINTER)
+
+public function irrEKeyCode_Multiply()
+
+ return c_func(xirrEKeyCode_Multiply,{})
+	
+end function
+
+public constant xirrEKeyCode_Add = define_c_func(irr,"irr_EKEY_CODE_KEY_ADD",{},C_POINTER)
+
+public function irrEKeyCode_Add()
+
+ return c_func(xirrEKeyCode_Add,{})
+	
+end function
+
+public constant xirrEKeyCode_Separator = define_c_func(irr,"irr_EKEY_CODE_KEY_SEPARATOR",{},C_POINTER)
+
+public function irrEKeyCode_Separator()
+
+ return c_func(xirrEKeyCode_Separator,{})
+	
+end function
+
+public constant xirrEKeyCode_Subtract = define_c_func(irr,"irr_EKEY_CODE_KEY_SUBTRACT",{},C_POINTER)
+
+public function irrEKeyCode_Subtract()
+
+ return c_func(xirrEKeyCode_Subtract,{})
+	
+end function
+
+public constant xirrEKeyCode_Decimal = define_c_func(irr,"irr_EKEY_CODE_KEY_DECIMAL",{},C_POINTER)
+
+public function irrEKeyCode_Decimal()
+
+ return c_func(xirrEKeyCode_Decimal,{})
+	
+end function
+
+public constant xirrEKeyCode_Divide = define_c_func(irr,"irr_EKEY_CODE_KEY_DIVIDE",{},C_POINTER)
+
+public function irrEKeyCode_Divide()
+
+ return c_func(xirrEKeyCode_Divide,{})
+	
+end function
+
+public constant xirrEKeyCode_F1 = define_c_func(irr,"irr_EKEY_CODE_KEY_F1",{},C_POINTER)
+
+public function irrEKeyCode_F1()
+
+ return c_func(xirrEKeyCode_F1,{})
+	
+end function
+
+public constant xirrEKeyCode_F2 = define_c_func(irr,"irr_EKEY_CODE_KEY_F2",{},C_POINTER)
+
+public function irrEKeyCode_F2()
+
+ return c_func(xirrEKeyCode_F2,{})
+	
+end function
+
+public constant xirrEKeyCode_F3 = define_c_func(irr,"irr_EKEY_CODE_KEY_F3",{},C_POINTER)
+
+public function irrEKeyCode_F3()
+
+ return c_func(xirrEKeyCode_F3,{})
+	
+end function
+
+public constant xirrEKeyCode_F4 = define_c_func(irr,"irr_EKEY_CODE_KEY_F4",{},C_POINTER)
+
+public function irrEKeyCode_F4()
+
+ return c_func(xirrEKeyCode_F4,{})
+	
+end function
+
+public constant xirrEKeyCode_F5 = define_c_func(irr,"irr_EKEY_CODE_KEY_F5",{},C_POINTER)
+
+public function irrEKeyCode_F5()
+
+ return c_func(xirrEKeyCode_F5,{})
+	
+end function
+
+public constant xirrEKeyCode_F6 = define_c_func(irr,"irr_EKEY_CODE_KEY_F6",{},C_POINTER)
+
+public function irrEKeyCode_F6()
+
+ return c_func(xirrEKeyCode_F6,{})
+	
+end function
+
+public constant xirrEKeyCode_F7 = define_c_func(irr,"irr_EKEY_CODE_KEY_F7",{},C_POINTER)
+
+public function irrEKeyCode_F7()
+
+ return c_func(xirrEKeyCode_F7,{})
+	
+end function
+
+public constant xirrEKeyCode_F8 = define_c_func(irr,"irr_EKEY_CODE_KEY_F8",{},C_POINTER)
+
+public function irrEKeyCode_F8()
+
+ return c_func(xirrEKeyCode_F8,{})
+	
+end function
+
+public constant xirrEKeyCode_F9 = define_c_func(irr,"irr_EKEY_CODE_KEY_F9",{},C_POINTER)
+
+public function irrEKeyCode_F9()
+
+ return c_func(xirrEKeyCode_F9,{})
+	
+end function
+
+public constant xirrEKeyCode_F10 = define_c_func(irr,"irr_EKEY_CODE_KEY_F10",{},C_POINTER)
+
+public function irrEKeyCode_F10()
+
+ return c_func(xirrEKeyCode_F10,{})
+	
+end function
+
+public constant xirrEKeyCode_F11 = define_c_func(irr,"irr_EKEY_CODE_KEY_F11",{},C_POINTER)
+
+public function irrEKeyCode_F11()
+
+ return c_func(xirrEKeyCode_F11,{})
+	
+end function
+
+public constant xirrEKeyCode_F12 = define_c_func(irr,"irr_EKEY_CODE_KEY_F12",{},C_POINTER)
+
+public function irrEKeyCode_F12()
+
+ return c_func(xirrEKeyCode_F12,{})
+	
+end function
+
+public constant xirrEKeyCode_F13 = define_c_func(irr,"irr_EKEY_CODE_KEY_F13",{},C_POINTER)
+
+public function irrEKeyCode_F13()
+
+ return c_func(xirrEKeyCode_F13,{})
+	
+end function
+
+public constant xirrEKeyCode_F14 = define_c_func(irr,"irr_EKEY_CODE_KEY_F14",{},C_POINTER)
+
+public function irrEKeyCode_F14()
+
+ return c_func(xirrEKeyCode_F14,{})
+	
+end function
+
+public constant xirrEKeyCode_F15 = define_c_func(irr,"irr_EKEY_CODE_KEY_15",{},C_POINTER)
+
+public function irrEKeyCode_F15()
+
+ return c_func(xirrEKeyCode_F15,{})
+	
+end function
+
+public constant xirrEKeyCode_F16 = define_c_func(irr,"irr_EKEY_CODE_KEY_F16",{},C_POINTER)
+
+public function irrEKeyCode_F16()
+
+ return c_func(xirrEKeyCode_F16,{})
+	
+end function
+
+public constant xirrEKeyCode_F17 = define_c_func(irr,"irr_EKEY_CODE_KEY_F17",{},C_POINTER)
+
+public function irrEKeyCode_F17()
+
+ return c_func(xirrEKeyCode_F17,{})
+	
+end function
+
+public constant xirrEKeyCode_F18 = define_c_func(irr,"irr_EKEY_CODE_KEY_F18",{},C_POINTER)
+
+public function irrEKeyCode_F18()
+
+ return c_func(xirrEKeyCode_F18,{})
+	
+end function
+
+public constant xirrEKeyCode_F19 = define_c_func(irr,"irr_EKEY_CODE_KEY_F19",{},C_POINTER)
+
+public function irrEKeyCode_F19()
+
+ return c_func(xirrEKeyCode_F19,{})
+	
+end function
+
+public constant xirrEKeyCode_F20 = define_c_func(irr,"irr_EKEY_CODE_KEY_F20",{},C_POINTER)
+
+public function irrEKeyCode_F20()
+
+ return c_func(xirrEKeyCode_F20,{})
+	
+end function
+
+public constant xirrEKeyCode_F21 = define_c_func(irr,"irr_EKEY_CODE_KEY_F21",{},C_POINTER)
+
+public function irrEKeyCode_F21()
+
+ return c_func(xirrEKeyCode_F21,{})
+	
+end function
+
+public constant xirrEKeyCode_F22 = define_c_func(irr,"irr_EKEY_CODE_KEY_F22",{},C_POINTER)
+
+public function irrEKeyCode_F22()
+
+ return c_func(xirrEKeyCode_F22,{})
+	
+end function
+
+public constant xirrEKeyCode_F23 = define_c_func(irr,"irr_EKEY_CODE_KEY_F23",{},C_POINTER)
+
+public function irrEKeyCode_F23()
+
+ return c_func(xirrEKeyCode_F23,{})
+	
+end function
+
+public constant xirrEKeyCode_F24 = define_c_func(irr,"irr_EKEY_CODE_KEY_F24",{},C_POINTER)
+
+public function irrEKeyCode_F24()
+
+ return c_func(xirrEKeyCode_F24,{})
+	
+end function
+
+public constant xirrEKeyCode_NUMLOCK = define_c_func(irr,"irr_EKEY_CODE_KEY_NUMLOCK",{},C_POINTER)
+
+public function irrEKeyCode_NUMLOCK()
+
+ return c_func(xirrEKeyCode_NUMLOCK,{})
+	
+end function
+
+public constant xirrEKeyCode_SCROLL = define_c_func(irr,"irr_EKEY_CODE_KEY_SCROLL",{},C_POINTER)
+
+public function irrEKeyCode_SCROLL()
+
+ return c_func(xirrEKeyCode_SCROLL,{})
+	
+end function
+
+public constant xirrEKeyCode_LShift = define_c_func(irr,"irr_EKEY_CODE_KEY_LSHIFT",{},C_POINTER)
+
+public function irrEKeyCode_LShift()
+
+ return c_func(xirrEKeyCode_LShift,{})
+	
+end function
+
+public constant xirrEKeyCode_RShift = define_c_func(irr,"irr_EKEY_CODE_KEY_RSHIFT",{},C_POINTER)
+
+public function irrEKeyCode_RShift()
+
+ return c_func(xirrEKeyCode_RShift,{})
+	
+end function
+
+public constant xirrEKeyCode_LControl = define_c_func(irr,"irr_EKEY_CODE_KEY_LCONTROL",{},C_POINTER)
+
+public function irrEKeyCode_LControl()
+
+ return c_func(xirrEKeyCode_LControl,{})
+	
+end function
+
+public constant xirrEKeyCode_RControl = define_c_func(irr,"irr_EKEY_CODE_KEY_RCONTROL",{},C_POINTER)
+
+public function irrEKeyCode_RControl()
+
+ return c_func(xirrEKeyCode_RControl,{})
+	
+end function
+
+public constant xirrEKeyCode_LMenu = define_c_func(irr,"irr_EKEY_CODE_KEY_LMENU",{},C_POINTER)
+
+public function irrEKeyCode_LMenu()
+
+ return c_func(xirrEKeyCode_LMenu,{})
+	
+end function
+
+public constant xirrEKeyCode_RMenu = define_c_func(irr,"irr_EKEY_CODE_KEY_RMENU",{},C_POINTER)
+
+public function irrEKeyCode_RMenu()
+
+ return c_func(xirrEKeyCode_RMenu,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_1 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_1",{},C_POINTER)
+
+public function irrEKeyCode_OEM_1()
+
+ return c_func(xirrEKeyCode_OEM_1,{})
+	
+end function
+
+public constant xirrEKeyCode_Plus = define_c_func(irr,"irr_EKEY_CODE_KEY_PLUS",{},C_POINTER)
+
+public function irrEKeyCode_Plus()
+
+ return c_func(xirrEKeyCode_Plus,{})
+	
+end function
+
+public constant xirrEKeyCode_Comma = define_c_func(irr,"irr_EKEY_CODE_KEY_COMMA",{},C_POINTER)
+
+public function irrEKeyCode_Comma()
+
+ return c_func(xirrEKeyCode_Comma,{})
+	
+end function
+
+public constant xirrEKeyCode_Minus = define_c_func(irr,"irr_EKEY_CODE_KEY_MINUS",{},C_POINTER)
+
+public function irrEKeyCode_Minus()
+
+ return c_func(xirrEKeyCode_Minus,{})
+	
+end function
+
+public constant xirrEKeyCode_Period = define_c_func(irr,"irr_EKEY_CODE_KEY_PERIOD",{},C_POINTER)
+
+public function ixrrEKeyCode_Period()
+
+ return c_func(xirrEKeyCode_Period,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_2 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_2",{},C_POINTER)
+
+public function irrEKeyCode_OEM_2()
+
+ return c_func(xirrEKeyCode_OEM_2,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_3 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_3",{},C_POINTER)
+
+public function irrEKeyCode_OEM_3()
+
+ return c_func(xirrEKeyCode_OEM_3,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_4 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_4",{},C_POINTER)
+
+public function irrEKeyCode_OEM_4()
+
+ return c_func(xirrEKeyCode_OEM_4,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_5 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_5",{},C_POINTER)
+
+public function irrEKeyCode_OEM_5()
+
+ return c_func(xirrEKeyCode_OEM_5,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_6 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_6",{},C_POINTER)
+
+public function irrEKeyCode_OEM_6()
+
+ return c_func(xirrEKeyCode_OEM_6,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_7 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_7",{},C_POINTER)
+
+public function irrEKeyCode_OEM_7()
+
+ return c_func(xirrEKeyCode_OEM_7,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_8 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_8",{},C_POINTER)
+
+public function irrEKeyCode_OEM_8()
+
+ return c_func(xirrEKeyCode_OEM_8,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_AX = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_AX",{},C_POINTER)
+
+public function irrEKeyCode_OEM_AX()
+
+ return c_func(xirrEKeyCode_OEM_AX,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_102 = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_102",{},C_POINTER)
+
+public function irrEKeyCode_OEM_102()
+
+ return c_func(xirrEKeyCode_OEM_102,{})
+	
+end function
+
+public constant xirrEKeyCode_ATTN = define_c_func(irr,"irr_EKEY_CODE_KEY_ATTN",{},C_POINTER)
+
+public function irrEKeyCode_ATTN()
+
+ return c_func(xirrEKeyCode_ATTN,{})
+	
+end function
+
+public constant xirrEKeyCode_CRSEL = define_c_func(irr,"irr_EKEY_CODE_KEY_CRSEL",{},C_POINTER)
+
+public function irrEKeyCode_CRSEL()
+
+ return c_func(xirrEKeyCode_CRSEL,{})
+	
+end function
+
+public constant xirrEKeyCode_EXSEL = define_c_func(irr,"irr_EKEY_CODE_KEY_EXSEL",{},C_POINTER)
+
+public function irrEKeyCode_EXSEL()
+
+ return c_func(xirrEKeyCode_EXSEL,{})
+	
+end function
+
+public constant xirrEKeyCode_EREOF = define_c_func(irr,"irr_EKEY_CODE_KEY_EREOF",{},C_POINTER)
+
+public function irrEKeyCode_EREOF()
+
+ return c_func(xirrEKeyCode_EREOF,{})
+	
+end function
+
+public constant xirrEKeyCode_PLAY = define_c_func(irr,"irr_EKEY_CODE_KEY_PLAY",{},C_POINTER)
+
+public function irrEKeyCode_PLAY()
+
+ return c_func(xirrEKeyCode_PLAY,{})
+	
+end function
+
+public constant xirrEKeyCode_ZOOM = define_c_func(irr,"irr_EKEY_CODE_KEY_ZOOM",{},C_POINTER)
+
+public function irrEKeyCode_ZOOM()
+
+ return c_func(xirrEKeyCode_ZOOM,{})
+	
+end function
+
+public constant xirrEKeyCode_PA1 = define_c_func(irr,"irr_EKEY_CODE_KEY_PA1",{},C_POINTER)
+
+public function irrEKeyCode_PA1()
+
+ return c_func(xirrEKeyCode_PA1,{})
+	
+end function
+
+public constant xirrEKeyCode_OEM_CLEAR = define_c_func(irr,"irr_EKEY_CODE_KEY_OEM_CLEAR",{},C_POINTER)
+
+public function irrEKeyCode_OEM_CLEAR()
+
+ return c_func(xirrEKeyCode_OEM_CLEAR,{})
+	
+end function
+
+public constant xirrEKeyCode_KEY_CODES_COUNT = define_c_func(irr,"irr_EKEY_CODES_COUNT",{},C_POINTER)
+
+public function irrEKeyCode_KEY_CODES_COUNT()
+
+ return c_func(xirrEKeyCode_KEY_CODES_COUNT,{})
+	
+end function
+­38.18
