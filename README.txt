@@ -1,8 +1,9 @@
 EuIrr
 Written by: Andy P.
-Eu Ver: 4.0.5
+Eu Ver: 4.1.0 Beta 2
 Irrlicht Ver: 1.8.4
-Paypal/Pateron: g_andy <at> live.com / https://www.patreon.com/CrazyVikingGamer
+Paypal/Pateron: g_andy <at> live.com  
+Patreon: https://www.patreon.com/CrazyVikingGamer
 
 About:
 
