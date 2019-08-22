@@ -1064,7 +1064,8 @@ public procedure irrIGUIElementSetRelativePosition(atom gui,atom x,atom y)
 	
 end procedure
 
-public constant xirrIGUIElementSetRelativePositionRect = define_c_proc(irr,"+irrIGUIElementSetRelativePositionRect",{C_POINTER,C_INT,C_INT,C_INT,C_INT})
+--another typo in DLL
+public constant xirrIGUIElementSetRelativePositionRect = define_c_proc(irr,"+ irrIGUIElementSetRealtivePostitionRect",{C_POINTER,C_INT,C_INT,C_INT,C_INT})
 
 public procedure irrIGUIElementSetRelativePositionRect(atom gui,atom x,atom y,atom x2,atom y2)
 
@@ -3163,4 +3164,4 @@ public function irrEKeyCode_KEY_CODES_COUNT()
  return c_func(xirrEKeyCode_KEY_CODES_COUNT,{})
 	
 end function
-­657.18
+­1067.21
