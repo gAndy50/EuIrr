@@ -650,11 +650,11 @@ public function irrIVideoDriverGetName(atom drv)
 	
 end function
 
-public constant xirrIVideoDriverDraw2DRectangle = define_c_proc(irr,"+irrIVideoDriverDraw2DRectangle",{C_POINTER,C_POINTER,C_POINTER,C_POINTER})
+public constant xirrIVideoDraw2DRectangle = define_c_proc(irr,"+irrIVideoDraw2DRectangle",{C_POINTER,C_POINTER,C_POINTER,C_POINTER})
 
-public procedure irrIVideoDriverDraw2DRectangle(atom drv,atom col,atom pos,sequence rect)
+public procedure irrIVideoDraw2DRectangle(atom drv,atom col,atom pos,sequence rect)
 
- c_proc(xirrIVideoDriverDraw2DRectangle,{drv,col,pos,rect})
+ c_proc(xirrIVideoDraw2DRectangle,{drv,col,pos,rect})
 	
 end procedure
 
@@ -3163,4 +3163,4 @@ public function irrEKeyCode_KEY_CODES_COUNT()
  return c_func(xirrEKeyCode_KEY_CODES_COUNT,{})
 	
 end function
-­3159.67
+­657.18
