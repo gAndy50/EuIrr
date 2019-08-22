@@ -3157,11 +3157,11 @@ public function irrEKeyCode_OEM_CLEAR()
 	
 end function
 
-public constant xirrEKeyCode_KEY_CODES_COUNT = define_c_func(irr,"+irr_EKEY_CODES_COUNT",{},C_POINTER)
+public constant xirrEKeyCode_KEY_CODES_COUNT = define_c_func(irr,"+ irr_EKEY_CODE_KEY_KEY_CODES_COUNT",{},C_POINTER)
 
 public function irrEKeyCode_KEY_CODES_COUNT()
 
  return c_func(xirrEKeyCode_KEY_CODES_COUNT,{})
 	
 end function
-­2560.77
+­3160.101
