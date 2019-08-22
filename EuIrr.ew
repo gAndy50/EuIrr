@@ -2277,7 +2277,7 @@ public function irrEKeyCodeKeyHelp()
 	
 end function
 
-public constant xirrEKeyCodeKey_0 = define_c_func(irr,"+irr_EKEY_CODE_KEY_0",{},C_POINTER)
+public constant xirrEKeyCodeKey_0 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_0",{},C_POINTER)
 
 public function irrEKeyCodeKey_0()
 
@@ -2285,7 +2285,7 @@ public function irrEKeyCodeKey_0()
 	
 end function
 
-public constant xirrEKeyCodeKey_1 = define_c_func(irr,"+irr_EKEY_CODE_KEY_1",{},C_POINTER)
+public constant xirrEKeyCodeKey_1 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_1",{},C_POINTER)
 
 public function irrEKeyCodeKey_1()
 
@@ -2293,7 +2293,7 @@ public function irrEKeyCodeKey_1()
 	
 end function
 
-public constant xirrEKeyCodeKey_2 = define_c_func(irr,"+irr_EKEY_CODE_KEY_2",{},C_POINTER)
+public constant xirrEKeyCodeKey_2 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_2",{},C_POINTER)
 
 public function irrEKeyCodeKey_2()
 
@@ -2301,7 +2301,7 @@ public function irrEKeyCodeKey_2()
 	
 end function
 
-public constant xirrEKeyCodeKey_3 = define_c_func(irr,"+irr_EKEY_CODE_KEY_3",{},C_POINTER)
+public constant xirrEKeyCodeKey_3 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_3",{},C_POINTER)
 
 public function irrEKeyCodeKey_3()
 
@@ -2309,7 +2309,7 @@ public function irrEKeyCodeKey_3()
 	
 end function
 
-public constant xirrEKeyCodeKey_4 = define_c_func(irr,"+irr_EKEY_CODE_KEY_4",{},C_POINTER)
+public constant xirrEKeyCodeKey_4 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_4",{},C_POINTER)
 
 public function irrEKeyCodeKey_4()
 
@@ -2317,7 +2317,7 @@ public function irrEKeyCodeKey_4()
 	
 end function
 
-public constant xirrEKeyCodeKey_5 = define_c_func(irr,"+irr_EKEY_CODE_KEY_5",{},C_POINTER)
+public constant xirrEKeyCodeKey_5 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_5",{},C_POINTER)
 
 public function irrEKeyCodeKey_5()
 
@@ -2325,7 +2325,7 @@ public function irrEKeyCodeKey_5()
 	
 end function
 
-public constant xirrEKeyCodeKey_6 = define_c_func(irr,"+irr_EKEY_CODE_KEY_6",{},C_POINTER)
+public constant xirrEKeyCodeKey_6 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_6",{},C_POINTER)
 
 public function irrEKeyCodeKey_6()
 
@@ -2333,7 +2333,7 @@ public function irrEKeyCodeKey_6()
 	
 end function
 
-public constant xirrEKeyCodeKey_7 = define_c_func(irr,"+irr_EKEY_CODE_KEY_7",{},C_POINTER)
+public constant xirrEKeyCodeKey_7 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_7",{},C_POINTER)
 
 public function irrEKeyCodeKey_7()
 
@@ -2341,7 +2341,7 @@ public function irrEKeyCodeKey_7()
 	
 end function
 
-public constant xirrEKeyCodeKey_8 = define_c_func(irr,"+irr_EKEY_CODE_KEY_8",{},C_POINTER)
+public constant xirrEKeyCodeKey_8 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_8",{},C_POINTER)
 
 public function irrEKeyCodeKey_8()
 
@@ -2349,7 +2349,7 @@ public function irrEKeyCodeKey_8()
 	
 end function
 
-public constant xirrEKeyCodeKey_9 = define_c_func(irr,"+irr_EKEY_CODE_KEY_9",{},C_POINTER)
+public constant xirrEKeyCodeKey_9 = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_9",{},C_POINTER)
 
 public function irrEKeyCodeKey_9()
 
@@ -2357,7 +2357,7 @@ public function irrEKeyCodeKey_9()
 	
 end function
 
-public constant xirrEKeyCodeKey_A = define_c_func(irr,"+irr_EKEY_CODE_KEY_A",{},C_POINTER)
+public constant xirrEKeyCodeKey_A = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_A",{},C_POINTER)
 
 public function irrEKeyCodeKey_A()
 
@@ -2365,7 +2365,7 @@ public function irrEKeyCodeKey_A()
 	
 end function
 
-public constant xirrEKeyCodeKey_B = define_c_func(irr,"+irr_EKEY_CODE_KEY_B",{},C_POINTER)
+public constant xirrEKeyCodeKey_B = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_B",{},C_POINTER)
 
 public function irrEKeyCodeKey_B()
 
@@ -2373,7 +2373,7 @@ public function irrEKeyCodeKey_B()
 	
 end function
 
-public constant xirrEKeyCodeKey_C = define_c_func(irr,"+irr_EKEY_CODE_KEY_C",{},C_POINTER)
+public constant xirrEKeyCodeKey_C = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_C",{},C_POINTER)
 
 public function irrEKeyCodeKey_C()
 
@@ -2381,7 +2381,7 @@ public function irrEKeyCodeKey_C()
 	
 end function
 
-public constant xirrEKeyCodeKey_D = define_c_func(irr,"+irr_EKEY_CODE_KEY_D",{},C_POINTER)
+public constant xirrEKeyCodeKey_D = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_D",{},C_POINTER)
 
 public function irrEKeyCodeKey_D()
 
@@ -2389,7 +2389,7 @@ public function irrEKeyCodeKey_D()
 	
 end function
 
-public constant xirrEKeyCodeKey_E = define_c_func(irr,"+irr_EKEY_CODE_KEY_E",{},C_POINTER)
+public constant xirrEKeyCodeKey_E = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_E",{},C_POINTER)
 
 public function irrEKeyCodeKey_E()
 
@@ -2397,7 +2397,7 @@ public function irrEKeyCodeKey_E()
 	
 end function
 
-public constant xirrEKeyCodeKey_F = define_c_func(irr,"+irr_EKEY_CODE_KEY_F",{},C_POINTER)
+public constant xirrEKeyCodeKey_F = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_F",{},C_POINTER)
 
 public function irrEKeyCodeKey_F()
 
@@ -2405,7 +2405,7 @@ public function irrEKeyCodeKey_F()
 	
 end function
 
-public constant xirrEKeyCodeKey_G = define_c_func(irr,"+irr_EKEY_CODE_KEY_G",{},C_POINTER)
+public constant xirrEKeyCodeKey_G = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_G",{},C_POINTER)
 
 public function irrEKeyCodeKey_G()
 
@@ -2413,7 +2413,7 @@ public function irrEKeyCodeKey_G()
 	
 end function
 
-public constant xirrEKeyCodeKey_H = define_c_func(irr,"+irr_EKEY_CODE_KEY_H",{},C_POINTER)
+public constant xirrEKeyCodeKey_H = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_H",{},C_POINTER)
 
 public function irrEKeyCodeKey_H()
 
@@ -2421,7 +2421,7 @@ public function irrEKeyCodeKey_H()
 	
 end function
 
-public constant xirrEKeyCodeKey_I = define_c_func(irr,"+irr_EKEY_CODE_KEY_I",{},C_POINTER)
+public constant xirrEKeyCodeKey_I = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_I",{},C_POINTER)
 
 public function irrEKeyCodeKey_I()
 
@@ -2429,7 +2429,7 @@ public function irrEKeyCodeKey_I()
 	
 end function
 
-public constant xirrEKeyCodeKey_J = define_c_func(irr,"+irr_EKEY_CODE_KEY_J",{},C_POINTER)
+public constant xirrEKeyCodeKey_J = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_J",{},C_POINTER)
 
 public function irrEKeyCodeKey_J()
 
@@ -2437,7 +2437,7 @@ public function irrEKeyCodeKey_J()
 	
 end function
 
-public constant xirrEKeyCodeKey_K = define_c_func(irr,"+irr_EKEY_CODE_KEY_K",{},C_POINTER)
+public constant xirrEKeyCodeKey_K = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_K",{},C_POINTER)
 
 public function irrEKeyCodeKey_K()
 
@@ -2445,7 +2445,7 @@ public function irrEKeyCodeKey_K()
 	
 end function
 
-public constant xirrEKeyCodeKey_L = define_c_func(irr,"+irr_EKEY_CODE_KEY_L",{},C_POINTER)
+public constant xirrEKeyCodeKey_L = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_L",{},C_POINTER)
 
 public function irrEKeyCodeKey_L()
 
@@ -2453,7 +2453,7 @@ public function irrEKeyCodeKey_L()
 	
 end function
 
-public constant xirrEKeyCodeKey_M = define_c_func(irr,"+irr_EKEY_CODE_KEY_M",{},C_POINTER)
+public constant xirrEKeyCodeKey_M = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_M",{},C_POINTER)
 
 public function irrEKeyCodeKey_M()
 
@@ -2461,7 +2461,7 @@ public function irrEKeyCodeKey_M()
 	
 end function
 
-public constant xirrEKeyCodeKey_N = define_c_func(irr,"+irr_EKEY_CODE_KEY_N",{},C_POINTER)
+public constant xirrEKeyCodeKey_N = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_N",{},C_POINTER)
 
 public function irrEKeyCodeKey_N()
 
@@ -2469,7 +2469,7 @@ public function irrEKeyCodeKey_N()
 	
 end function
 
-public constant xirrEKeyCodeKey_O = define_c_func(irr,"+irr_EKEY_CODE_KEY_O",{},C_POINTER)
+public constant xirrEKeyCodeKey_O = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_O",{},C_POINTER)
 
 public function irrEKeyCodeKey_O()
 
@@ -2477,7 +2477,7 @@ public function irrEKeyCodeKey_O()
 	
 end function
 
-public constant xirrEKeyCodeKey_P = define_c_func(irr,"+irr_EKEY_CODE_KEY_P",{},C_POINTER)
+public constant xirrEKeyCodeKey_P = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_P",{},C_POINTER)
 
 public function irrEKeyCodeKey_P()
 
@@ -2485,7 +2485,7 @@ public function irrEKeyCodeKey_P()
 	
 end function
 
-public constant xirrEKeyCodeKey_Q = define_c_func(irr,"+irr_EKEY_CODE_KEY_Q",{},C_POINTER)
+public constant xirrEKeyCodeKey_Q = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_Q",{},C_POINTER)
 
 public function irrEKeyCodeKey_Q()
 
@@ -2493,7 +2493,7 @@ public function irrEKeyCodeKey_Q()
 	
 end function
 
-public constant xirrEKeyCodeKey_R = define_c_func(irr,"+irr_EKEY_CODE_KEY_R",{},C_POINTER)
+public constant xirrEKeyCodeKey_R = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_R",{},C_POINTER)
 
 public function irrEKeyCodeKey_R()
 
@@ -2501,7 +2501,7 @@ public function irrEKeyCodeKey_R()
 	
 end function
 
-public constant xirrEKeyCodeKey_S = define_c_func(irr,"+irr_EKEY_CODE_KEY_S",{},C_POINTER)
+public constant xirrEKeyCodeKey_S = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_S",{},C_POINTER)
 
 public function irrEKeyCodeKey_S()
 
@@ -2509,7 +2509,7 @@ public function irrEKeyCodeKey_S()
 	
 end function
 
-public constant xirrEKeyCodeKey_T = define_c_func(irr,"+irr_EKEY_CODE_KEY_T",{},C_POINTER)
+public constant xirrEKeyCodeKey_T = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_T",{},C_POINTER)
 
 public function irrEKeyCodeKey_T()
 
@@ -2517,7 +2517,7 @@ public function irrEKeyCodeKey_T()
 	
 end function
 
-public constant xirrEKeyCodeKey_U = define_c_func(irr,"+irr_EKEY_CODE_KEY_U",{},C_POINTER)
+public constant xirrEKeyCodeKey_U = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_U",{},C_POINTER)
 
 public function irrEKeyCodeKey_U()
 
@@ -2525,7 +2525,7 @@ public function irrEKeyCodeKey_U()
 	
 end function
 
-public constant xirrEKeyCodeKey_V = define_c_func(irr,"+irr_EKEY_CODE_KEY_V",{},C_POINTER)
+public constant xirrEKeyCodeKey_V = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_V",{},C_POINTER)
 
 public function irrEKeyCodeKey_V()
 
@@ -2533,7 +2533,7 @@ public function irrEKeyCodeKey_V()
 	
 end function
 
-public constant xirrEKeyCodeKey_W = define_c_func(irr,"+irr_EKEY_CODE_KEY_W",{},C_POINTER)
+public constant xirrEKeyCodeKey_W = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_W",{},C_POINTER)
 
 public function irrEKeyCodeKey_W()
 
@@ -2541,7 +2541,7 @@ public function irrEKeyCodeKey_W()
 	
 end function
 
-public constant xirrEKeyCodeKey_X = define_c_func(irr,"+irr_EKEY_CODE_KEY_X",{},C_POINTER)
+public constant xirrEKeyCodeKey_X = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_X",{},C_POINTER)
 
 public function irrEKeyCodeKey_X()
 
@@ -2549,7 +2549,7 @@ public function irrEKeyCodeKey_X()
 	
 end function
 
-public constant xirrEKeyCodeKey_Y = define_c_func(irr,"+irr_EKEY_CODE_KEY_Y",{},C_POINTER)
+public constant xirrEKeyCodeKey_Y = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_Y",{},C_POINTER)
 
 public function irrEKeyCodeKey_Y()
 
@@ -2557,7 +2557,7 @@ public function irrEKeyCodeKey_Y()
 	
 end function
 
-public constant xirrEKeyCodeKey_Z = define_c_func(irr,"+irr_EKEY_CODE_KEY_Z",{},C_POINTER)
+public constant xirrEKeyCodeKey_Z = define_c_func(irr,"+irr_EKEY_CODE_KEY_KEY_Z",{},C_POINTER)
 
 public function irrEKeyCodeKey_Z()
 
@@ -3164,4 +3164,4 @@ public function irrEKeyCode_KEY_CODES_COUNT()
  return c_func(xirrEKeyCode_KEY_CODES_COUNT,{})
 	
 end function
-­1067.21
+­2560.77
