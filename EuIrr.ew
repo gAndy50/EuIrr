@@ -567,11 +567,11 @@ end procedure
 
 public constant xirrISceneNodeSetVisible = define_c_proc(irr,"+irrISceneNodeSetVisible",{C_POINTER,C_BOOL})
 
-public function irrISceneNodeSetVisible(atom node,integer visible)
+public procedure irrISceneNodeSetVisible(atom node,integer visible)
 
- return c_func(xirrISceneNodeSetVisible,{node,visible})
+ c_proc(xirrISceneNodeSetVisible,{node,visible})
 	
-end function
+end procedure
 
 public constant xirrISceneNodeIsVisible = define_c_func(irr,"+irrISceneNodeIsVisible",{C_POINTER},C_BOOL)
 
@@ -3164,4 +3164,4 @@ public function irrEKeyCode_KEY_CODES_COUNT()
  return c_func(xirrEKeyCode_KEY_CODES_COUNT,{})
 	
 end function
-­1885.98
+­574.13
