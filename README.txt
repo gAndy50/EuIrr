@@ -4,7 +4,7 @@ Eu Ver: 4.1.0 Beta 2
 Irrlicht Ver: 1.8.4
 Paypal/Pateron: g_andy <at> live.com  
 Patreon: https://www.patreon.com/CrazyVikingGamer
-Copyright (c) 2023
+Copyright (c) 2024
 
 About:
 
